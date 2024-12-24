@@ -1,0 +1,124 @@
+spring.servlet.multipart.location: /ruoyi/server/temp
+
+spring.boot.admin.client:
+  enabled: true
+  url: http://localhost:9090/admin
+  instance:
+    service-host-type: IP
+  username: ruoyi
+  password: 123456
+
+--- # xxl-job
+xxl.job:
+  enabled: true
+  admin-addresses: http://localhost:9100/xxl-job-admin
+  access-token: xxl-job
+  executor:
+    appname: xxl-job-executor
+    port: 2${server.port}
+    address:
+    ip:
+    logpath: ./logs/xxl-job
+    logretentiondays: 30
+
+--- #
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    dynamic:
+      p6spy: false
+      primary: master
+      strict: true
+      datasource:
+        master:
+          type: ${spring.datasource.type}
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/games-api?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
+          username: games-api
+          password: d5X55s5dXRsFBLKm
+        #
+        slave:
+          lazy: true
+          type: ${spring.datasource.type}
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
+          username:
+          password:
+#        oracle:
+#          type: ${spring.datasource.type}
+#          driverClassName: oracle.jdbc.OracleDriver
+#          url: jdbc:oracle:thin:@//localhost:1521/XE
+#          username: ROOT
+#          password: root
+#        postgres:
+#          type: ${spring.datasource.type}
+#          driverClassName: org.postgresql.Driver
+#          url: jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
+#          username: root
+#          password: root
+#        sqlserver:
+#          type: ${spring.datasource.type}
+#          driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#          url: jdbc:sqlserver://localhost:1433;DatabaseName=tempdb;SelectMethod=cursor;encrypt=false;rewriteBatchedStatements=true
+#          username: SA
+#          password: root
+      hikari:
+        maxPoolSize: 20
+        minIdle: 10
+        connectionTimeout: 30000
+        validationTimeout: 5000
+        idleTimeout: 600000
+        maxLifetime: 1800000
+        keepaliveTime: 30000
+
+--- # redis
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    # password:
+    timeout: 10s
+    ssl: false
+
+redisson:
+  # redis key
+  keyPrefix:
+  threads: 16
+  nettyThreads: 32
+  singleServerConfig:
+    clientName: ${ruoyi.name}
+    connectionMinimumIdleSize: 32
+    connectionPoolSize: 64
+    idleConnectionTimeout: 10000
+    timeout: 3000
+    subscriptionConnectionPoolSize: 50
+
+--- # mail
+mail:
+  enabled: false
+  host: smtp.163.com
+  port: 465
+  auth: true
+  from: xxx@163.com
+  user: xxx@163.com
+  pass: xxxxxxxxxx
+  starttlsEnable: true
+  sslEnable: true
+  timeout: 0
+  connectionTimeout: 0
+
+--- # sms
+sms:
+  alibaba:
+    requestUrl: dysmsapi.aliyuncs.com
+    accessKeyId: xxxxxxx
+    accessKeySecret: xxxxxxx
+    signature:
+  tencent:
+    requestUrl: sms.tencentcloudapi.com
+    accessKeyId: xxxxxxx
+    accessKeySecret: xxxxxxx
+    signature:
+    sdkAppId: appid
+    territory: ap-guangzhou

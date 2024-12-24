@@ -1,0 +1,165 @@
+#
+ruoyi:
+  #
+  name: RuoYi-Vue-Plus
+  #
+  version: ${ruoyi-vue-plus.version}
+  #
+  copyrightYear: 2023
+  #
+  cacheLazy: false
+
+captcha:
+  type: MATH
+  category: CIRCLE
+  numberLength: 1
+  charLength: 4
+
+server:
+  port: 8089
+  servlet:
+    context-path: /
+  undertow:
+    max-http-post-size: -1
+    buffer-size: 512
+    direct-buffers: true
+    threads:
+      io: 8
+      worker: 256
+
+logging:
+  level:
+    com.ruoyi: @logging.level@
+    org.springframework: warn
+  config: classpath:logback-plus.xml
+
+user:
+  password:
+    maxRetryCount: 5
+    lockTime: 10
+
+spring:
+  application:
+    name: ${ruoyi.name}
+  messages:
+    basename: i18n/messages
+  profiles:
+    active: @profiles.active@
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  devtools:
+    restart:
+      enabled: true
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: false
+      fail_on_empty_beans: false
+    deserialization:
+      fail_on_unknown_properties: false
+
+sa-token:
+  token-name: Authorization
+  timeout: 86400
+  active-timeout: 1800
+  dynamic-active-timeout: true
+  is-concurrent: true
+  is-share: false
+  is-read-header: true
+  is-read-cookie: false
+  token-prefix: "Bearer"
+  jwt-secret-key: abcdefghijklmnopqrstuvwxyz
+
+security:
+  excludes:
+    - /*.html
+    - /**/*.html
+    - /**/*.css
+    - /**/*.js
+    - /favicon.ico
+    - /error
+    - /*/api-docs
+    - /*/api-docs/**
+    - /actuator
+    - /actuator/**
+
+mybatis-plus:
+  mapperPackage: com.ruoyi.**.mapper
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  typeAliasesPackage: com.ruoyi.**.domain
+  checkConfigLocation: false
+  configuration:
+    mapUnderscoreToCamelCase: true
+    autoMappingBehavior: PARTIAL
+    autoMappingUnknownColumnBehavior: NONE
+    logImpl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    banner: true
+    dbConfig:
+      idType: ASSIGN_ID
+      logicDeleteValue: 2
+      logicNotDeleteValue: 0
+      insertStrategy: NOT_NULL
+      updateStrategy: NOT_NULL
+      where-strategy: NOT_NULL
+
+mybatis-encryptor:
+  enable: false
+  algorithm: BASE64
+  encode: BASE64
+  password:
+  publicKey:
+  privateKey:
+
+springdoc:
+  api-docs:
+    enabled: true
+  info:
+    title: ''
+    description: ''
+    version: 'version: ${ruoyi-vue-plus.version}'
+    contact:
+      name: Lion Li
+      email: crazylionli@163.com
+      url: https://gitee.com/dromara/RuoYi-Vue-Plus
+  components:
+    security-schemes:
+      apiKey:
+        type: APIKEY
+        in: HEADER
+        name: ${sa-token.token-name}
+  group-configs:
+    - group: 2.system
+      packages-to-scan: com.ruoyi.web
+    - group: 3.gen
+      packages-to-scan: com.ruoyi.generator
+
+xss:
+  enabled: true
+  excludes: /system/notice
+  urlPatterns: /system/*,/monitor/*,/tool/*
+
+thread-pool:
+  enabled: false
+  queueCapacity: 128
+  keepAliveSeconds: 300
+
+lock4j:
+  acquire-timeout: 3000
+  expire: 30000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+    logfile:
+      external-file: ./logs/sys-console.log

@@ -1,0 +1,6 @@
+#
+gen:
+  author: ruoyi
+  packageName: com.ruoyi.system
+  autoRemovePre: false
+  tablePrefix: sys_

@@ -1,0 +1,18 @@
+
+insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values(${table.menuIds[0]}, '${functionName}', '${parentMenuId}', '1', '${businessName}', '${moduleName}/${businessName}/index', 1, 0, 'C', '0', '0', '${permissionPrefix}:list', '#', 'admin', sysdate, '', null, '${functionName} menu');
+
+insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values(${table.menuIds[1]}, '${functionName} select', ${table.menuIds[0]}, '1',  '#', '', 1,  0, 'F', '0', '0', '${permissionPrefix}:query',        '#', 'admin', sysdate, '', null, '');
+
+insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values(${table.menuIds[2]}, '${functionName} create', ${table.menuIds[0]}, '2',  '#', '', 1,  0, 'F', '0', '0', '${permissionPrefix}:add',          '#', 'admin', sysdate, '', null, '');
+
+insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values(${table.menuIds[3]}, '${functionName} update', ${table.menuIds[0]}, '3',  '#', '', 1,  0, 'F', '0', '0', '${permissionPrefix}:edit',         '#', 'admin', sysdate, '', null, '');
+
+insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values(${table.menuIds[4]}, '${functionName} delete', ${table.menuIds[0]}, '4',  '#', '', 1,  0, 'F', '0', '0', '${permissionPrefix}:remove',       '#', 'admin', sysdate, '', null, '');
+
+insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values(${table.menuIds[5]}, '${functionName} export', ${table.menuIds[0]}, '5',  '#', '', 1,  0, 'F', '0', '0', '${permissionPrefix}:export',       '#', 'admin', sysdate, '', null, '');
