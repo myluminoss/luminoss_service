@@ -24,11 +24,11 @@ public class SqlUtil {
     public static final String SQL_PATTERN = "[a-zA-Z0-9_\\ \\,\\.]+";
 
     /**
-     * ，
+     * ,
      */
     public static String escapeOrderBySql(String value) {
         if (StringUtils.isNotEmpty(value) && !isValidOrderBySql(value)) {
-            throw new UtilException("，");
+            throw new UtilException(",");
         }
         return value;
     }

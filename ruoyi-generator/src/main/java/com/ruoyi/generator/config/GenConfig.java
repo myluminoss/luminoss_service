@@ -26,7 +26,7 @@ public class GenConfig {
     public static String packageName;
 
     /**
-     * ，false
+     * ,false
      */
     public static boolean autoRemovePre;
 

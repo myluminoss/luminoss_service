@@ -22,7 +22,7 @@ public class Sm2Encryptor extends AbstractEncryptor {
         String privateKey = context.getPrivateKey();
         String publicKey = context.getPublicKey();
         if (StringUtils.isAnyEmpty(privateKey, publicKey)) {
-            throw new IllegalArgumentException("SM2，，。");
+            throw new IllegalArgumentException("SM2,,.");
         }
         this.context = context;
     }

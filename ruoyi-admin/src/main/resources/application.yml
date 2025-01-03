@@ -8,6 +8,8 @@ ruoyi:
   copyrightYear: 2023
   #
   cacheLazy: false
+  #
+  language: en_US
 
 captcha:
   type: MATH
@@ -65,8 +67,8 @@ spring:
 
 sa-token:
   token-name: Authorization
-  timeout: 86400
-  active-timeout: 1800
+  timeout: 2592000
+  active-timeout: 1296000
   dynamic-active-timeout: true
   is-concurrent: true
   is-share: false

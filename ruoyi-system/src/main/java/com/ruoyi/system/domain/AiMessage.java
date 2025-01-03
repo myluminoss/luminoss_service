@@ -48,4 +48,5 @@ public class AiMessage extends BaseEntity {
      */
     private String remark;
 
+    private String role;
 }

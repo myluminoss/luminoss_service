@@ -112,9 +112,9 @@ public class RedisConfig {
      *     slaveConnectionMinimumIdleSize: 32
      *     # slave
      *     slaveConnectionPoolSize: 64
-     *     # ，：
+     *     # ,:
      *     idleConnectionTimeout: 10000
-     *     # ，：
+     *     # ,:
      *     timeout: 3000
      *     #
      *     subscriptionConnectionPoolSize: 50

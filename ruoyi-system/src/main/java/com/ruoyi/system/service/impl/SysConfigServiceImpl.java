@@ -82,7 +82,7 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
     /**
      *
      *
-     * @return true，false
+     * @return true,false
      */
     @Override
     public boolean selectCaptchaEnabled() {

@@ -22,7 +22,7 @@ public class RsaEncryptor extends AbstractEncryptor {
         String privateKey = context.getPrivateKey();
         String publicKey = context.getPublicKey();
         if (StringUtils.isAnyEmpty(privateKey, publicKey)) {
-            throw new IllegalArgumentException("RSA，，。");
+            throw new IllegalArgumentException("RSA,,.");
         }
         this.context = context;
     }

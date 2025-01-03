@@ -22,7 +22,7 @@ public interface HttpStatus {
     int ACCEPTED = 202;
 
     /**
-     * ，
+     * ,
      */
     int NO_CONTENT = 204;
 
@@ -42,7 +42,7 @@ public interface HttpStatus {
     int NOT_MODIFIED = 304;
 
     /**
-     * （，）
+     * （,）
      */
     int BAD_REQUEST = 400;
 
@@ -52,12 +52,12 @@ public interface HttpStatus {
     int UNAUTHORIZED = 401;
 
     /**
-     * ，
+     * ,
      */
     int FORBIDDEN = 403;
 
     /**
-     * ，
+     * ,
      */
     int NOT_FOUND = 404;
 
@@ -67,12 +67,12 @@ public interface HttpStatus {
     int BAD_METHOD = 405;
 
     /**
-     * ，
+     * ,
      */
     int CONFLICT = 409;
 
     /**
-     * ，
+     * ,
      */
     int UNSUPPORTED_TYPE = 415;
 

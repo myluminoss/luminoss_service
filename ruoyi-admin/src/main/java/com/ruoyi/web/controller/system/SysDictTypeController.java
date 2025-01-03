@@ -70,7 +70,7 @@ public class SysDictTypeController extends BaseController {
     @PostMapping
     public R<Void> add(@Validated @RequestBody SysDictType dict) {
         if (!dictTypeService.checkDictTypeUnique(dict)) {
-            return R.fail("'" + dict.getDictName() + "'，");
+            return R.fail("'" + dict.getDictName() + "',");
         }
         dictTypeService.insertDictType(dict);
         return R.ok();
@@ -84,7 +84,7 @@ public class SysDictTypeController extends BaseController {
     @PutMapping
     public R<Void> edit(@Validated @RequestBody SysDictType dict) {
         if (!dictTypeService.checkDictTypeUnique(dict)) {
-            return R.fail("'" + dict.getDictName() + "'，");
+            return R.fail("'" + dict.getDictName() + "',");
         }
         dictTypeService.updateDictType(dict);
         return R.ok();

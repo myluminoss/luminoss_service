@@ -209,7 +209,7 @@ public class SysDeptServiceImpl implements ISysDeptService, DeptService {
             dept.setDeptId(deptId);
             List<SysDept> depts = this.selectDeptList(dept);
             if (CollUtil.isEmpty(depts)) {
-                throw new ServiceException("！");
+                throw new ServiceException("!");
             }
         }
     }
@@ -225,7 +225,7 @@ public class SysDeptServiceImpl implements ISysDeptService, DeptService {
         SysDept info = baseMapper.selectById(dept.getParentId());
         // ,
         if (!UserConstants.DEPT_NORMAL.equals(info.getStatus())) {
-            throw new ServiceException("，");
+            throw new ServiceException(",");
         }
         dept.setAncestors(info.getAncestors() + StringUtils.SEPARATOR + dept.getParentId());
         return baseMapper.insert(dept);
@@ -251,7 +251,7 @@ public class SysDeptServiceImpl implements ISysDeptService, DeptService {
         int result = baseMapper.updateById(dept);
         if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()) && StringUtils.isNotEmpty(dept.getAncestors())
             && !StringUtils.equals(UserConstants.DEPT_NORMAL, dept.getAncestors())) {
-            // ，
+            // ,
             updateParentDeptStatusNormal(dept);
         }
         return result;

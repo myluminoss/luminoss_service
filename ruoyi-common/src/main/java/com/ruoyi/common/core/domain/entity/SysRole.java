@@ -62,19 +62,19 @@ public class SysRole extends BaseEntity {
     private Integer roleSort;
 
     /**
-     * （1：；2：；3：；4：；5：）
+     * （1:；2:；3:；4:；5:）
      */
     @ExcelProperty(value = "", converter = ExcelDictConvert.class)
     @ExcelDictFormat(readConverterExp = "1=,2=,3=,4=,5=")
     private String dataScope;
 
     /**
-     * （ 0： 1：）
+     * （ 0: 1:）
      */
     private Boolean menuCheckStrictly;
 
     /**
-     * （0： 1： ）
+     * （0: 1: ）
      */
     private Boolean deptCheckStrictly;
 

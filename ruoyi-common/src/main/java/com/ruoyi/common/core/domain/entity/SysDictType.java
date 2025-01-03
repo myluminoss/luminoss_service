@@ -47,7 +47,7 @@ public class SysDictType extends BaseEntity {
     @ExcelProperty(value = "")
     @NotBlank(message = "")
     @Size(min = 0, max = 100, message = "{max}")
-    @Pattern(regexp = "^[a-z][a-z0-9_]*$", message = "，（，，）")
+    @Pattern(regexp = "^[a-z][a-z0-9_]*$", message = ",（,,）")
     private String dictType;
 
     /**

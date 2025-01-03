@@ -47,7 +47,7 @@ public class Web3Service {
         if (content == null) {
             return false;
         }
-        // todo ，Hash.sha3 content.getBytes()
+        // todo ,Hash.sha3 content.getBytes()
         //
         // byte[] msgHash = Hash.sha3(content.getBytes());
         byte[] msgHash = content.getBytes();
@@ -58,7 +58,7 @@ public class Web3Service {
             v += 27;
         }
 
-        //，
+        //,
         Sign.SignatureData signatureData = new Sign.SignatureData(
             v,
             Arrays.copyOfRange(signatureBytes, 0, 32),

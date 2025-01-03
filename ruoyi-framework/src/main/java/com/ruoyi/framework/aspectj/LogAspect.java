@@ -114,19 +114,19 @@ public class LogAspect {
         operLog.setTitle(log.title());
         //
         operLog.setOperatorType(log.operatorType().ordinal());
-        // request，
+        // request,
         if (log.isSaveRequestData()) {
-            // ，。
+            // ,.
             setRequestValue(joinPoint, operLog, log.excludeParamNames());
         }
-        // response，
+        // response,
         if (log.isSaveResponseData() && ObjectUtil.isNotNull(jsonResult)) {
             operLog.setJsonResult(StringUtils.substring(JsonUtils.toJsonString(jsonResult), 0, 2000));
         }
     }
 
     /**
-     * ，log
+     * ,log
      *
      * @param operLog
      * @throws Exception
@@ -169,10 +169,10 @@ public class LogAspect {
     }
 
     /**
-     * 。
+     * .
      *
-     * @param o 。
-     * @return ，true；false。
+     * @param o .
+     * @return ,true；false.
      */
     @SuppressWarnings("rawtypes")
     public boolean isFilterObject(final Object o) {

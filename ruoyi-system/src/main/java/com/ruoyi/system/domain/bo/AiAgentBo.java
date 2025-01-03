@@ -5,10 +5,9 @@ import com.ruoyi.common.core.validate.EditGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import javax.validation.constraints.*;
-
-import java.util.Date;
-
 import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.math.BigDecimal;
 
 /**
  * Ai ai_agent
@@ -52,6 +51,11 @@ public class AiAgentBo extends BaseEntity {
     /**
      *
      */
+    private String iconImg;
+
+    /**
+     *
+     */
     @NotBlank(message = "", groups = { AddGroup.class, EditGroup.class })
     private String img;
 
@@ -66,5 +70,22 @@ public class AiAgentBo extends BaseEntity {
      */
     private String remark;
 
+    /**
+     *
+     */
+    private String hash;
 
+    private String tags;
+
+    private BigDecimal marketCap;
+
+    private BigDecimal progress;
+
+    private BigDecimal dayChange;
+
+    private Long totalTransactions;
+
+    private Long invokeApi;
+
+    private Integer decimals;
 }

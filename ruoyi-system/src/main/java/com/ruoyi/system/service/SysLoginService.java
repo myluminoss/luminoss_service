@@ -31,7 +31,6 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.redis.RedisUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 
-import com.ruoyi.system.domain.UserToken;
 import com.ruoyi.system.domain.bo.UserTokenBo;
 import com.ruoyi.system.domain.dto.LoginByWalletRequest;
 import com.ruoyi.system.domain.vo.UserTokenVo;
@@ -78,10 +77,10 @@ public class SysLoginService {
     private Integer lockTime;
 
     /**
+     * login by wallet
      *
-     *
-     * @param request
-     * @return
+     * @param request request
+     * @return  res
      */
     @Transactional
     public Map<String, Object> walletLogin(LoginByWalletRequest request) {
@@ -108,6 +107,7 @@ public class SysLoginService {
                 sysUser.setNickName(request.getWalletAddress());
                 sysUser.setPassword(BCrypt.hashpw(RandomUtil.randomString(8)));
                 sysUser.setUserType(UserType.APP_USER.getUserType());
+                sysUser.setAvatarIndex(RandomUtil.randomInt(1, 16));
 
                 if (!userService.checkUserNameUnique(sysUser)) {
                     throw new UserException("user.register.save.error", sysUser.getUserName());
@@ -133,14 +133,13 @@ public class SysLoginService {
             }
 
             LoginUser loginUser = buildLoginUser(user);
-            // token
             LoginHelper.loginByDevice(loginUser, DeviceType.PC);
 
             recordLogininfor(user.getUserName(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
             recordLoginInfo(user.getUserId(), user.getUserName());
             Map<String, Object> ajax = new HashMap<>();
             ajax.put(Constants.TOKEN, StpUtil.getTokenValue());
-            ajax.put("user", user);
+            ajax.put("user", userService.getUserVoBySysUser(user));
             return ajax;
         } catch (SignatureException e) {
             throw new RuntimeException("Signature verification failed:" + e.getMessage());
@@ -310,10 +309,10 @@ public class SysLoginService {
             .select(SysUser::getUserName, SysUser::getStatus)
             .eq(SysUser::getUserName, username));
         if (ObjectUtil.isNull(user)) {
-            log.info("：{} .", username);
+            log.info(":{} .", username);
             throw new UserException("user.not.exists", username);
         } else if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
-            log.info("：{} .", username);
+            log.info(":{} .", username);
             throw new UserException("user.blocked", username);
         }
         return userMapper.selectUserByUserName(username);
@@ -324,10 +323,10 @@ public class SysLoginService {
             .select(SysUser::getPhonenumber, SysUser::getStatus)
             .eq(SysUser::getPhonenumber, phonenumber));
         if (ObjectUtil.isNull(user)) {
-            log.info("：{} .", phonenumber);
+            log.info(":{} .", phonenumber);
             throw new UserException("user.not.exists", phonenumber);
         } else if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
-            log.info("：{} .", phonenumber);
+            log.info(":{} .", phonenumber);
             throw new UserException("user.blocked", phonenumber);
         }
         return userMapper.selectUserByPhonenumber(phonenumber);
@@ -338,10 +337,10 @@ public class SysLoginService {
             .select(SysUser::getPhonenumber, SysUser::getStatus)
             .eq(SysUser::getEmail, email));
         if (ObjectUtil.isNull(user)) {
-            log.info("：{} .", email);
+            log.info(":{} .", email);
             throw new UserException("user.not.exists", email);
         } else if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
-            log.info("：{} .", email);
+            log.info(":{} .", email);
             throw new UserException("user.blocked", email);
         }
         return userMapper.selectUserByEmail(email);
@@ -352,10 +351,10 @@ public class SysLoginService {
         // todo  userService.selectUserByOpenid(openid);
         SysUser user = new SysUser();
         if (ObjectUtil.isNull(user)) {
-            log.info("：{} .", openid);
+            log.info(":{} .", openid);
             // todo
         } else if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
-            log.info("：{} .", openid);
+            log.info(":{} .", openid);
             // todo
         }
         return user;
@@ -379,7 +378,7 @@ public class SysLoginService {
     }
 
     /**
-     *
+     * update user login info
      *
      * @param userId ID
      */
@@ -399,7 +398,7 @@ public class SysLoginService {
         String errorKey = CacheConstants.PWD_ERR_CNT_KEY + username;
         String loginFail = Constants.LOGIN_FAIL;
 
-        // ，0 ( : key + username + ip)
+        // ,0 ( : key + username + ip)
         int errorNumber = ObjectUtil.defaultIfNull(RedisUtils.getCacheObject(errorKey), 0);
         //
         if (errorNumber >= maxRetryCount) {

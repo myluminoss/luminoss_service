@@ -26,16 +26,28 @@ public class CheckInLogVo implements Serializable {
     private Long id;
 
     /**
-     * id
+     * user id
      */
-    @ExcelProperty(value = "id")
+    @ExcelProperty(value = "user id")
     private Long userId;
 
     /**
-     *
+     * times
      */
-    @ExcelProperty(value = "")
+    @ExcelProperty(value = "times")
     private Long times;
+
+    /**
+     * name
+     */
+    @ExcelProperty(value = "name")
+    private String name;
+
+    /**
+     * check in integral
+     */
+    @ExcelProperty(value = "integral")
+    private Integer integral;
 
     /**
      * hash
@@ -50,18 +62,21 @@ public class CheckInLogVo implements Serializable {
     private String status;
 
     /**
-     *
+     * meg
      */
-    @ExcelProperty(value = "")
+    @ExcelProperty(value = "msg")
     private String msg;
 
     /**
-     *
+     * remark
      */
-    @ExcelProperty(value = "")
+    @ExcelProperty(value = "remark")
     private String remark;
 
-    @ExcelProperty(value = "")
+    /**
+     * create time
+     */
+    @ExcelProperty(value = "create time")
     private Date createTime;
 
 }

@@ -36,7 +36,7 @@ public class SaTokenConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // ，
+        // ,
         registry.addInterceptor(new SaInterceptor(handler -> {
             AllUrlHandler allUrlHandler = SpringUtils.getBean(AllUrlHandler.class);
             //  --

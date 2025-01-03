@@ -41,7 +41,7 @@ public class ResourcesConfig implements WebMvcConfigurer {
         config.addAllowedMethod("*");
         //  1800
         config.setMaxAge(1800L);
-        // ，
+        // ,
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         // CorsFilter

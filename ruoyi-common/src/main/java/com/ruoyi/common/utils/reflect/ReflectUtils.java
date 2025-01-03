@@ -22,7 +22,7 @@ public class ReflectUtils extends ReflectUtil {
 
     /**
      * Getter.
-     * ，：..
+     * ,:..
      */
     @SuppressWarnings("unchecked")
     public static <E> E invokeGetter(Object obj, String propertyName) {
@@ -35,8 +35,8 @@ public class ReflectUtils extends ReflectUtil {
     }
 
     /**
-     * Setter, 。
-     * ，：..
+     * Setter, .
+     * ,:..
      */
     public static <E> void invokeSetter(Object obj, String propertyName, E value) {
         Object object = obj;

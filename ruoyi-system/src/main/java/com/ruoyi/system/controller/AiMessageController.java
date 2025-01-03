@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-import cn.dev33.satoken.annotation.SaIgnore;
 import cn.hutool.core.util.ObjUtil;
 import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.common.helper.LoginHelper;
+import com.ruoyi.system.domain.vo.AiAgentVo;
+import com.ruoyi.system.service.IAiAgentService;
 import lombok.RequiredArgsConstructor;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
@@ -29,7 +31,7 @@ import com.ruoyi.system.service.IAiMessageService;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * Ai
+ * Ai message
  *
  * @author ruoyi
  * @date 2024-12-23
@@ -41,47 +43,66 @@ public class AiMessageController extends BaseController {
 
     private final IAiMessageService iAiMessageService;
 
+    private final IAiAgentService iAiAgentService;
 
     /**
-     * Ai
+     * Ai add
      */
-    @SaIgnore
     @Log(title = "Ai", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping("/aiMessage/addMessage")
     public R<Void> addMessage(@Validated(AddGroup.class) @RequestBody AiMessageBo bo) {
+        bo.setUserId(LoginHelper.getUserId());
+
+        AiAgentVo aiAgentVo = iAiAgentService.queryById(bo.getAiAgentId());
+        if (ObjUtil.isNull(aiAgentVo) || !LoginHelper.getUserId().equals(aiAgentVo.getUserId())) {
+            return R.fail("Ai agent does not exist");
+        }
+
         return toAjax(iAiMessageService.insertByBo(bo));
     }
 
     /**
-     * Ai
+     * Ai list
      */
-    @SaIgnore
     @GetMapping("/aiMessage/getMessageList")
     public TableDataInfo<AiMessageVo> getMessageList(AiMessageBo bo, PageQuery pageQuery) {
         if (ObjUtil.isNull(bo.getAiAgentId())) {
-            throw new ServiceException("AiID");
+            throw new ServiceException("Missing ai agent id");
+        }
+
+        AiAgentVo aiAgentVo = iAiAgentService.queryById(bo.getAiAgentId());
+        if (ObjUtil.isNull(aiAgentVo) || !LoginHelper.getUserId().equals(aiAgentVo.getUserId())) {
+            throw new ServiceException("Ai agent does not exist");
+        }
+
+        if (ObjUtil.isNull(pageQuery.getPageSize())) {
+            pageQuery.setPageSize(10000);
         }
         return iAiMessageService.queryPageList(bo, pageQuery);
     }
 
     /**
-     * Ai
+     * Ai delete
      *
-     * @param id
+     * @param id id
      */
-    @SaIgnore
     @Log(title = "Ai", businessType = BusinessType.DELETE)
     @DeleteMapping("/aiMessage/delMessage/{id}")
     public R<Void> delMessage(@PathVariable Long id) {
         List<Long> ids = new ArrayList<>();
         ids.add(id);
 
+        AiMessageVo aiMessageVo = iAiMessageService.queryById(id);
+        if (ObjUtil.isNull(aiMessageVo) || !LoginHelper.getUserId().equals(aiMessageVo.getUserId())) {
+            throw new ServiceException("Record does not exist");
+        }
+
         return toAjax(iAiMessageService.deleteWithValidByIds(ids, true));
     }
 
     /**
-     * Ai
+     * Ai list
      */
     @SaCheckPermission("system:aiMessage:list")
     @GetMapping("/system/aiMessage/list")
@@ -90,7 +111,7 @@ public class AiMessageController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai export
      */
     @SaCheckPermission("system:aiMessage:export")
     @Log(title = "Ai", businessType = BusinessType.EXPORT)
@@ -101,19 +122,19 @@ public class AiMessageController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai Info
      *
-     * @param id
+     * @param id id
      */
     @SaCheckPermission("system:aiMessage:query")
     @GetMapping("/system/aiMessage/{id}")
-    public R<AiMessageVo> getInfo(@NotNull(message = "")
+    public R<AiMessageVo> getInfo(@NotNull(message = "id is null")
                                      @PathVariable Long id) {
         return R.ok(iAiMessageService.queryById(id));
     }
 
     /**
-     * Ai
+     * Ai add
      */
     @SaCheckPermission("system:aiMessage:add")
     @Log(title = "Ai", businessType = BusinessType.INSERT)
@@ -124,7 +145,7 @@ public class AiMessageController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai edit
      */
     @SaCheckPermission("system:aiMessage:edit")
     @Log(title = "Ai", businessType = BusinessType.UPDATE)
@@ -135,14 +156,14 @@ public class AiMessageController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai remove
      *
-     * @param ids
+     * @param ids ids
      */
     @SaCheckPermission("system:aiMessage:remove")
     @Log(title = "Ai", businessType = BusinessType.DELETE)
     @DeleteMapping("/system/aiMessage/{ids}")
-    public R<Void> remove(@NotEmpty(message = "")
+    public R<Void> remove(@NotEmpty(message = "ids is empty")
                           @PathVariable Long[] ids) {
         return toAjax(iAiMessageService.deleteWithValidByIds(Arrays.asList(ids), true));
     }

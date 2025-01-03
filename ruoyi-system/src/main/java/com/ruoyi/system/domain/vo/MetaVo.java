@@ -18,12 +18,12 @@ public class MetaVo {
     private String title;
 
     /**
-     * ，src/assets/icons/svg
+     * ,src/assets/icons/svg
      */
     private String icon;
 
     /**
-     * true， <keep-alive>
+     * true, <keep-alive>
      */
     private boolean noCache;
 

@@ -119,8 +119,24 @@ public class SysLoginController {
      *
      * @return
      */
-    @GetMapping("getInfo")
+    @GetMapping("/getInfo")
     public R<Map<String, Object>> getInfo() {
+        LoginUser loginUser = LoginHelper.getLoginUser();
+        SysUser user = userService.selectUserById(loginUser.getUserId());
+        Map<String, Object> ajax = new HashMap<>();
+        ajax.put("user", userService.getUserVoBySysUser(user));
+        ajax.put("roles", loginUser.getRolePermission());
+        ajax.put("permissions", loginUser.getMenuPermission());
+        return R.ok(ajax);
+    }
+
+    /**
+     *
+     *
+     * @return
+     */
+    @GetMapping("/getAdminInfo")
+    public R<Map<String, Object>> getAdminInfo() {
         LoginUser loginUser = LoginHelper.getLoginUser();
         SysUser user = userService.selectUserById(loginUser.getUserId());
         Map<String, Object> ajax = new HashMap<>();

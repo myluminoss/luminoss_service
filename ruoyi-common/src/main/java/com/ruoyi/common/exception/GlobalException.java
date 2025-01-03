@@ -15,14 +15,14 @@ public class GlobalException extends RuntimeException {
     private String message;
 
     /**
-     * ，
+     * ,
      * <p>
      *  {@link CommonResult#getDetailMessage()}
      */
     private String detailMessage;
 
     /**
-     * ，
+     * ,
      */
     public GlobalException() {
     }

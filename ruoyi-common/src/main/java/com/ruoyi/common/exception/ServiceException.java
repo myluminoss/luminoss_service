@@ -19,14 +19,14 @@ public final class ServiceException extends RuntimeException {
     private String message;
 
     /**
-     * ，
+     * ,
      * <p>
      *  {@link CommonResult#getDetailMessage()}
      */
     private String detailMessage;
 
     /**
-     * ，
+     * ,
      */
     public ServiceException() {
     }

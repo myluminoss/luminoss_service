@@ -1,12 +1,18 @@
 package com.ruoyi.system.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.util.RandomUtil;
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.vo.SysUserSimpleVo;
+import com.ruoyi.common.core.service.UserService;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.domain.PageQuery;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.ruoyi.system.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.domain.bo.AiAgentBo;
@@ -15,6 +21,7 @@ import com.ruoyi.system.domain.AiAgent;
 import com.ruoyi.system.mapper.AiAgentMapper;
 import com.ruoyi.system.service.IAiAgentService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Collection;
@@ -31,8 +38,56 @@ public class AiAgentServiceImpl implements IAiAgentService {
 
     private final AiAgentMapper baseMapper;
 
+    private final ISysUserService iSysUserService;
+
+    public AiAgentVo getAgentDetails(Long id) {
+        AiAgentVo aiAgentVo = baseMapper.selectVoById(id);
+
+        if (ObjUtil.isNotNull(aiAgentVo)) {
+            SysUser user = iSysUserService.selectUserById(aiAgentVo.getUserId());
+            SysUserSimpleVo userSimpleVo = new SysUserSimpleVo();
+            userSimpleVo.setId(user.getUserId());
+            userSimpleVo.setNickname(user.getNickName());
+            userSimpleVo.setAvatar(user.getAvatar());
+            userSimpleVo.setAvatarIndex(user.getAvatarIndex());
+            aiAgentVo.setUser(userSimpleVo);
+        }
+        return aiAgentVo;
+    }
+
+    public TableDataInfo<AiAgentVo> getAgentList(AiAgentBo bo, PageQuery pageQuery) {
+        TableDataInfo<AiAgentVo> pageList = queryPageList(bo, pageQuery);
+
+        for (AiAgentVo aiAgentVo : pageList.getRows()) {
+            SysUser user = iSysUserService.selectUserById(aiAgentVo.getUserId());
+            SysUserSimpleVo userSimpleVo = new SysUserSimpleVo();
+            userSimpleVo.setId(user.getUserId());
+            userSimpleVo.setNickname(user.getNickName());
+            userSimpleVo.setAvatar(user.getAvatar());
+            userSimpleVo.setAvatarIndex(user.getAvatarIndex());
+            aiAgentVo.setUser(userSimpleVo);
+        }
+        return pageList;
+    }
+
+    public AiAgentBo createAgent(AiAgentBo bo) {
+        bo.setTags("Badge,Celestial,Oracle");
+        bo.setMarketCap(RandomUtil.randomBigDecimal(BigDecimal.valueOf(0.01), BigDecimal.valueOf(100)));
+        bo.setProgress(RandomUtil.randomBigDecimal(BigDecimal.valueOf(0.01), BigDecimal.valueOf(100)));
+        bo.setDayChange(RandomUtil.randomBigDecimal(BigDecimal.valueOf(5), BigDecimal.valueOf(100)));
+        bo.setTotalTransactions(RandomUtil.randomLong(1000, 100000));
+        bo.setInvokeApi(RandomUtil.randomLong(1000, 100000));
+        bo.setDecimals(0);
+        boolean res = insertByBo(bo);
+        if (res) {
+            return bo;
+        } else {
+            throw new RuntimeException("Create Agent Failed");
+        }
+    }
+
     /**
-     * Ai
+     * Ai query by id
      */
     @Override
     public AiAgentVo queryById(Long id){
@@ -40,7 +95,7 @@ public class AiAgentServiceImpl implements IAiAgentService {
     }
 
     /**
-     * Ai
+     * Ai list
      */
     @Override
     public TableDataInfo<AiAgentVo> queryPageList(AiAgentBo bo, PageQuery pageQuery) {
@@ -50,7 +105,7 @@ public class AiAgentServiceImpl implements IAiAgentService {
     }
 
     /**
-     * Ai
+     * Ai list
      */
     @Override
     public List<AiAgentVo> queryList(AiAgentBo bo) {
@@ -71,7 +126,7 @@ public class AiAgentServiceImpl implements IAiAgentService {
     }
 
     /**
-     * Ai
+     * Ai insert
      */
     @Override
     public Boolean insertByBo(AiAgentBo bo) {
@@ -85,7 +140,7 @@ public class AiAgentServiceImpl implements IAiAgentService {
     }
 
     /**
-     * Ai
+     * Ai update
      */
     @Override
     public Boolean updateByBo(AiAgentBo bo) {
@@ -95,14 +150,14 @@ public class AiAgentServiceImpl implements IAiAgentService {
     }
 
     /**
-     *
+     * valid entity before save
      */
     private void validEntityBeforeSave(AiAgent entity){
         //TODO ,
     }
 
     /**
-     * Ai
+     * Ai delete
      */
     @Override
     public Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid) {

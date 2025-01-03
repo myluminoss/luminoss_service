@@ -28,9 +28,9 @@ import java.util.*;
 
 /**
  * <h1>Excel</h1>
- * Excel，1000
+ * Excel,1000
  * <p>
- * 1000，，
+ * 1000,,
  *
  * @author Emil.Zhang
  */
@@ -39,7 +39,7 @@ public class ExcelDownHandler implements SheetWriteHandler {
 
     /**
      * Excel
-     * ，
+     * ,
      */
     private static final String EXCEL_COLUMN_NAME = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /**
@@ -74,11 +74,11 @@ public class ExcelDownHandler implements SheetWriteHandler {
     /**
      * <h2></h2>
      * 1.@ExcelProperty@DropDown
-     * value，
+     * value,
      * <p>
-     * 2.ExcelUtil，
+     * 2.ExcelUtil,
      * <p>
-     * 3.，
+     * 3.,
      */
     @Override
     public void afterSheetCreate(WriteWorkbookHolder writeWorkbookHolder, WriteSheetHolder writeSheetHolder) {
@@ -95,22 +95,22 @@ public class ExcelDownHandler implements SheetWriteHandler {
             //
             List<String> options = new ArrayList<>();
             if (field.isAnnotationPresent(ExcelDictFormat.class)) {
-                // @ExcelDictFormat，
+                // @ExcelDictFormat,
                 ExcelDictFormat format = field.getDeclaredAnnotation(ExcelDictFormat.class);
                 String dictType = format.dictType();
                 String converterExp = format.readConverterExp();
                 if (StrUtil.isNotBlank(dictType)) {
-                    // ，
+                    // ,
                     Collection<String> values = Optional.ofNullable(dictService.getAllDictByDictType(dictType))
                         .orElseThrow(() -> new ServiceException(String.format(" %s ", dictType)))
                         .values();
                     options = new ArrayList<>(values);
                 } else if (StrUtil.isNotBlank(converterExp)) {
-                    // ，
+                    // ,
                     options = StrUtil.split(converterExp, format.separator(), true, true);
                 }
             } else if (field.isAnnotationPresent(ExcelEnumFormat.class)) {
-                // @ExcelEnumFormat，
+                // @ExcelEnumFormat,
                 ExcelEnumFormat format = field.getDeclaredAnnotation(ExcelEnumFormat.class);
                 List<Object> values = EnumUtil.getFieldValues(format.enumClass(), format.textField());
                 options = StreamUtils.toList(values, String::valueOf);
@@ -118,7 +118,7 @@ public class ExcelDownHandler implements SheetWriteHandler {
             if (ObjectUtil.isNotEmpty(options)) {
                 //
                 if (options.size() > 20) {
-                    // 20，
+                    // 20,
                     dropDownWithSheet(helper, workbook, sheet, index, options);
                 } else {
                     //
@@ -132,13 +132,13 @@ public class ExcelDownHandler implements SheetWriteHandler {
         dropDownOptions.forEach(everyOptions -> {
             //
             if (!everyOptions.getNextOptions().isEmpty()) {
-                // ，
+                // ,
                 dropDownLinkedOptions(helper, workbook, sheet, everyOptions);
             } else if (everyOptions.getOptions().size() > 10) {
-                // 10，
+                // 10,
                 dropDownWithSheet(helper, workbook, sheet, everyOptions.getIndex(), everyOptions.getOptions());
             } else if (everyOptions.getOptions().size() != 0) {
-                // ，
+                // ,
                 dropDownWithSimple(helper, sheet, everyOptions.getIndex(), everyOptions.getOptions());
             }
         });
@@ -185,7 +185,7 @@ public class ExcelDownHandler implements SheetWriteHandler {
         );
         //
         name.setRefersToFormula(firstOptionsFunction);
-        // ，
+        // ,
         this.markOptionsToSheet(helper, sheet, options.getIndex(), helper.createFormulaListConstraint(linkedOptionsSheetName));
 
         for (int columIndex = 0; columIndex < firstOptions.size(); columIndex++) {
@@ -204,10 +204,10 @@ public class ExcelDownHandler implements SheetWriteHandler {
                 //
                 .setCellValue(thisFirstOptionsValue);
 
-            // ，
+            // ,
             List<String> secondOptions = secoundOptionsMap.get(thisFirstOptionsValue);
             if (CollUtil.isEmpty(secondOptions)) {
-                // ，Excel
+                // ,Excel
                 secondOptions = Collections.singletonList("_0");
             }
 
@@ -224,8 +224,8 @@ public class ExcelDownHandler implements SheetWriteHandler {
             );
             //
             sonName.setRefersToFormula(sonFunction);
-            // ，
-            // ，Excel
+            // ,
+            // ,Excel
             String mainSheetFirstOptionsColumnName = getExcelColumnName(options.getIndex());
             for (int i = 0; i < 100; i++) {
                 //
@@ -257,7 +257,7 @@ public class ExcelDownHandler implements SheetWriteHandler {
 
     /**
      * <h2></h2>
-     * ，Excel，
+     * ,Excel,
      *
      * @param celIndex
      * @param value
@@ -271,10 +271,10 @@ public class ExcelDownHandler implements SheetWriteHandler {
         //
         for (int i = 0; i < value.size(); i++) {
             int finalI = i;
-            // ，
+            // ,
             Row row = Optional.ofNullable(simpleDataSheet.getRow(i))
                 .orElseGet(() -> simpleDataSheet.createRow(finalI));
-            // ，
+            // ,
             Cell cell = Optional.ofNullable(row.getCell(currentOptionsColumnIndex))
                 .orElseGet(() -> row.createCell(currentOptionsColumnIndex));
             //
@@ -294,27 +294,27 @@ public class ExcelDownHandler implements SheetWriteHandler {
             value.size());
         //
         name.setRefersToFormula(function);
-        // ，
+        // ,
         this.markOptionsToSheet(helper, sheet, celIndex, helper.createFormulaListConstraint(nameName));
         currentOptionsColumnIndex++;
     }
 
     /**
-     * ，
+     * ,
      */
     private void markOptionsToSheet(DataValidationHelper helper, Sheet sheet, Integer celIndex,
                                     DataValidationConstraint constraint) {
-        // ,：、、、
+        // ,:、、、
         CellRangeAddressList addressList = new CellRangeAddressList(1, 1000, celIndex, celIndex);
         markDataValidationToSheet(helper, sheet, constraint, addressList);
     }
 
     /**
-     * ，
+     * ,
      */
     private void markLinkedOptionsToSheet(DataValidationHelper helper, Sheet sheet, Integer rowIndex,
                                           Integer celIndex, DataValidationConstraint constraint) {
-        // ,：、、、
+        // ,:、、、
         CellRangeAddressList addressList = new CellRangeAddressList(rowIndex, rowIndex, celIndex, celIndex);
         markDataValidationToSheet(helper, sheet, constraint, addressList);
     }
@@ -335,7 +335,7 @@ public class ExcelDownHandler implements SheetWriteHandler {
             dataValidation.createErrorBox("", "");
             dataValidation.setShowErrorBox(true);
             //
-            dataValidation.createPromptBox("：", "，");
+            dataValidation.createPromptBox(":", ",");
             dataValidation.setShowPromptBox(true);
             sheet.addValidationData(dataValidation);
         } else {
@@ -347,9 +347,9 @@ public class ExcelDownHandler implements SheetWriteHandler {
     /**
      * <h2>index</h2>
      * indexExcel
-     * <p>1，index0，A</p>
-     * 27，index26，AA
-     * <p>28，index27，AB</p>
+     * <p>1,index0,A</p>
+     * 27,index26,AA
+     * <p>28,index27,AB</p>
      *
      * @param columnIndex index
      * @return index
@@ -359,7 +359,7 @@ public class ExcelDownHandler implements SheetWriteHandler {
         int columnCircleCount = columnIndex / 26;
         // 26
         int thisCircleColumnIndex = columnIndex % 26;
-        // 260，
+        // 260,
         String columnPrefix = columnCircleCount == 0
             ? StrUtil.EMPTY
             : StrUtil.subWithLength(EXCEL_COLUMN_NAME, columnCircleCount - 1, 1);

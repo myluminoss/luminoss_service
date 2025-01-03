@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 public @interface ExcelDictFormat {
 
     /**
-     * ，type (: sys_user_sex)
+     * ,type (: sys_user_sex)
      */
     String dictType() default "";
 
@@ -25,7 +25,7 @@ public @interface ExcelDictFormat {
     String readConverterExp() default "";
 
     /**
-     * ，
+     * ,
      */
     String separator() default StringUtils.SEPARATOR;
 

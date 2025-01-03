@@ -67,7 +67,7 @@ public class PlusDataPermissionHandler {
             currentUser = LoginHelper.getLoginUser();
             DataPermissionHelper.setVariable("user", currentUser);
         }
-        // ，
+        // ,
         if (LoginHelper.isAdmin()) {
             return where;
         }

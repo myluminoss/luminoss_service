@@ -70,9 +70,9 @@ public class SysPostController extends BaseController {
     @PostMapping
     public R<Void> add(@Validated @RequestBody SysPost post) {
         if (!postService.checkPostNameUnique(post)) {
-            return R.fail("'" + post.getPostName() + "'，");
+            return R.fail("'" + post.getPostName() + "',");
         } else if (!postService.checkPostCodeUnique(post)) {
-            return R.fail("'" + post.getPostName() + "'，");
+            return R.fail("'" + post.getPostName() + "',");
         }
         return toAjax(postService.insertPost(post));
     }
@@ -85,12 +85,12 @@ public class SysPostController extends BaseController {
     @PutMapping
     public R<Void> edit(@Validated @RequestBody SysPost post) {
         if (!postService.checkPostNameUnique(post)) {
-            return R.fail("'" + post.getPostName() + "'，");
+            return R.fail("'" + post.getPostName() + "',");
         } else if (!postService.checkPostCodeUnique(post)) {
-            return R.fail("'" + post.getPostName() + "'，");
+            return R.fail("'" + post.getPostName() + "',");
         } else if (UserConstants.POST_DISABLE.equals(post.getStatus())
             && postService.countUserPostById(post.getPostId()) > 0) {
-            return R.fail("，!");
+            return R.fail(",!");
         }
         return toAjax(postService.updatePost(post));
     }

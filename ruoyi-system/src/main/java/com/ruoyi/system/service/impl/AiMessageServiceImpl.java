@@ -32,7 +32,7 @@ public class AiMessageServiceImpl implements IAiMessageService {
     private final AiMessageMapper baseMapper;
 
     /**
-     * Ai
+     * Ai query by id
      */
     @Override
     public AiMessageVo queryById(Long id){
@@ -40,7 +40,7 @@ public class AiMessageServiceImpl implements IAiMessageService {
     }
 
     /**
-     * Ai
+     * Ai list
      */
     @Override
     public TableDataInfo<AiMessageVo> queryPageList(AiMessageBo bo, PageQuery pageQuery) {
@@ -51,7 +51,7 @@ public class AiMessageServiceImpl implements IAiMessageService {
     }
 
     /**
-     * Ai
+     * Ai list
      */
     @Override
     public List<AiMessageVo> queryList(AiMessageBo bo) {
@@ -70,7 +70,7 @@ public class AiMessageServiceImpl implements IAiMessageService {
     }
 
     /**
-     * Ai
+     * Ai insert
      */
     @Override
     public Boolean insertByBo(AiMessageBo bo) {
@@ -84,7 +84,7 @@ public class AiMessageServiceImpl implements IAiMessageService {
     }
 
     /**
-     * Ai
+     * Ai update
      */
     @Override
     public Boolean updateByBo(AiMessageBo bo) {
@@ -94,14 +94,14 @@ public class AiMessageServiceImpl implements IAiMessageService {
     }
 
     /**
-     *
+     * valid Entity Before Save
      */
     private void validEntityBeforeSave(AiMessage entity){
         //TODO ,
     }
 
     /**
-     * Ai
+     * Ai delete
      */
     @Override
     public Boolean deleteWithValidByIds(Collection<Long> ids, Boolean isValid) {

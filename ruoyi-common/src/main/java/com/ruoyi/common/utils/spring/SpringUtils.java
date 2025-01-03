@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public final class SpringUtils extends SpringUtil {
 
     /**
-     * BeanFactorybean，true
+     * BeanFactorybean,true
      *
      * @param name
      * @return boolean
@@ -25,8 +25,8 @@ public final class SpringUtils extends SpringUtil {
     }
 
     /**
-     * beansingletonprototype。
-     * bean，（NoSuchBeanDefinitionException）
+     * beansingletonprototype.
+     * bean,（NoSuchBeanDefinitionException）
      *
      * @param name
      * @return boolean
@@ -44,7 +44,7 @@ public final class SpringUtils extends SpringUtil {
     }
 
     /**
-     * beanbean，
+     * beanbean,
      *
      * @param name
      */

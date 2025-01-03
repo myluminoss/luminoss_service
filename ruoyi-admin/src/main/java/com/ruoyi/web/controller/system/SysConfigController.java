@@ -80,7 +80,7 @@ public class SysConfigController extends BaseController {
     @PostMapping
     public R<Void> add(@Validated @RequestBody SysConfig config) {
         if (!configService.checkConfigKeyUnique(config)) {
-            return R.fail("'" + config.getConfigName() + "'，");
+            return R.fail("'" + config.getConfigName() + "',");
         }
         configService.insertConfig(config);
         return R.ok();
@@ -94,7 +94,7 @@ public class SysConfigController extends BaseController {
     @PutMapping
     public R<Void> edit(@Validated @RequestBody SysConfig config) {
         if (!configService.checkConfigKeyUnique(config)) {
-            return R.fail("'" + config.getConfigName() + "'，");
+            return R.fail("'" + config.getConfigName() + "',");
         }
         configService.updateConfig(config);
         return R.ok();

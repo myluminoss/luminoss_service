@@ -25,12 +25,12 @@ public class RouterVo {
     private String path;
 
     /**
-     * ， true
+     * , true
      */
     private boolean hidden;
 
     /**
-     * ， noRedirect
+     * , noRedirect
      */
     private String redirect;
 
@@ -40,12 +40,12 @@ public class RouterVo {
     private String component;
 
     /**
-     * ： {"id": 1, "name": "ry"}
+     * : {"id": 1, "name": "ry"}
      */
     private String query;
 
     /**
-     *  children 1，--
+     *  children 1,--
      */
     private Boolean alwaysShow;
 

@@ -31,7 +31,7 @@ public class RoleDTO implements Serializable {
     private String roleKey;
 
     /**
-     * （1：；2：；3：；4：；5：）
+     * （1:；2:；3:；4:；5:）
      */
     private String dataScope;
 

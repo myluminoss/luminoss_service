@@ -86,6 +86,8 @@ public class SysUser extends BaseEntity {
      */
     private String avatar;
 
+    private Integer avatarIndex;
+
     /**
      *
      */

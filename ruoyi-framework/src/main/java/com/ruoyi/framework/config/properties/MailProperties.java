@@ -45,12 +45,12 @@ public class MailProperties {
     private String pass;
 
     /**
-     * ，RFC-822
+     * ,RFC-822
      */
     private String from;
 
     /**
-     *  STARTTLS，STARTTLS。（TLSSSL）， 。
+     *  STARTTLS,STARTTLS.（TLSSSL）, .
      */
     private Boolean starttlsEnable;
 
@@ -60,12 +60,12 @@ public class MailProperties {
     private Boolean sslEnable;
 
     /**
-     * SMTP，，
+     * SMTP,,
      */
     private Long timeout;
 
     /**
-     * Socket，，
+     * Socket,,
      */
     private Long connectionTimeout;
 }

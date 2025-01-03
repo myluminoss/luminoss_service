@@ -83,13 +83,13 @@ public class CaptchaController {
     @GetMapping("/captchaEmail")
     public R<Void> emailCode(@NotBlank(message = "{user.email.not.blank}") String email) {
         if (!mailProperties.getEnabled()) {
-            return R.fail("！");
+            return R.fail("!");
         }
         String key = CacheConstants.CAPTCHA_CODE_KEY + email;
         String code = RandomUtil.randomNumbers(4);
         RedisUtils.setCacheObject(key, code, Duration.ofMinutes(Constants.CAPTCHA_EXPIRATION));
         try {
-            MailUtils.sendText(email, "", "：" + code + "，" + Constants.CAPTCHA_EXPIRATION + "，。");
+            MailUtils.sendText(email, "", ":" + code + "," + Constants.CAPTCHA_EXPIRATION + ",.");
         } catch (Exception e) {
             log.error(" => {}", e.getMessage());
             return R.fail(e.getMessage());

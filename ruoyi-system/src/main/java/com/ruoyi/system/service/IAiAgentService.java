@@ -1,6 +1,6 @@
 package com.ruoyi.system.service;
 
-import com.ruoyi.system.domain.AiAgent;
+
 import com.ruoyi.system.domain.vo.AiAgentVo;
 import com.ruoyi.system.domain.bo.AiAgentBo;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -16,6 +16,17 @@ import java.util.List;
  * @date 2024-12-22
  */
 public interface IAiAgentService {
+
+    AiAgentVo getAgentDetails(Long id);
+
+    TableDataInfo<AiAgentVo> getAgentList(AiAgentBo bo, PageQuery pageQuery);
+
+    /**
+     * create ai agent
+     * @param bo agent info
+     * @return res
+     */
+    AiAgentBo createAgent(AiAgentBo bo);
 
     /**
      * Ai

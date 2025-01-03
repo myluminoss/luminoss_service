@@ -36,7 +36,7 @@ public class VelocityUtils {
     private static final String MYBATIS_PATH = "main/resources/mapper";
 
     /**
-     * ，
+     * ,
      */
     private static final String DEFAULT_PARENT_MENU_ID = "3";
 

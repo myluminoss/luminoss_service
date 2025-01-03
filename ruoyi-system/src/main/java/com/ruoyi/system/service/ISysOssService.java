@@ -25,6 +25,8 @@ public interface ISysOssService {
 
     SysOssVo getById(Long ossId);
 
+    SysOssVo uploadBase64(String base64);
+
     SysOssVo upload(MultipartFile file);
 
     SysOssVo upload(File file);

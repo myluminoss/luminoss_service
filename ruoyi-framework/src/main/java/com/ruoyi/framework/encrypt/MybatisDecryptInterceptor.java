@@ -66,7 +66,7 @@ public class MybatisDecryptInterceptor implements Interceptor {
             if(CollUtil.isEmpty(sourceList)) {
                 return;
             }
-            // 。，
+            // .,
             Object firstItem = sourceList.get(0);
             if (ObjectUtil.isNull(firstItem) || CollUtil.isEmpty(encryptorManager.getFieldCache(firstItem.getClass()))) {
                 return;
@@ -85,7 +85,7 @@ public class MybatisDecryptInterceptor implements Interceptor {
     }
 
     /**
-     * 。
+     * .
      *
      * @param value
      * @param field

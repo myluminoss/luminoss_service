@@ -40,12 +40,12 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        // json，
+        // json,
         if (!isJsonRequest()) {
             return super.getInputStream();
         }
 
-        // ，
+        // ,
         String json = StrUtil.str(IoUtil.readBytes(super.getInputStream(), false), StandardCharsets.UTF_8);
         if (StringUtils.isEmpty(json)) {
             return super.getInputStream();

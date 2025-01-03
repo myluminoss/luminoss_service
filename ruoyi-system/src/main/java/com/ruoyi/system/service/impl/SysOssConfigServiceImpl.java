@@ -44,7 +44,7 @@ public class SysOssConfigServiceImpl implements ISysOssConfigService {
     private final SysOssConfigMapper baseMapper;
 
     /**
-     * ，，
+     * ,,
      */
     @Override
     public void init() {

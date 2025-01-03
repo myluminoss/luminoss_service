@@ -43,7 +43,7 @@ public class EncryptorProperties {
     private String privateKey;
 
     /**
-     * ，base64/hex
+     * ,base64/hex
      */
     private EncodeType encode;
 

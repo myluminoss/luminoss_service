@@ -63,9 +63,9 @@ public class SysOssController extends BaseController {
     }
 
     /**
-     * OSS
+     * OSS upload
      *
-     * @param file
+     * @param file file obj
      */
     @SaCheckPermission("system:oss:upload")
     @Log(title = "OSS", businessType = BusinessType.INSERT)

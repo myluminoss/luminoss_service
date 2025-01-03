@@ -72,7 +72,7 @@ public class EncryptorManager {
     }
 
     /**
-     * 。。
+     * ..
      *
      * @param value
      * @param encryptContext

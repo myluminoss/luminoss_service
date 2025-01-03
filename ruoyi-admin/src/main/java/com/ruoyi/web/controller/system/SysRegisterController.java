@@ -32,7 +32,7 @@ public class SysRegisterController extends BaseController {
     @PostMapping("/register")
     public R<Void> register(@Validated @RequestBody RegisterBody user) {
         if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
-            return R.fail("！");
+            return R.fail("!");
         }
         registerService.register(user);
         return R.ok();

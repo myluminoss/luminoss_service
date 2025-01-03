@@ -147,7 +147,7 @@ public class SysPostServiceImpl implements ISysPostService {
         for (Long postId : postIds) {
             SysPost post = selectPostById(postId);
             if (countUserPostById(postId) > 0) {
-                throw new ServiceException(String.format("%1$s，!", post.getPostName()));
+                throw new ServiceException(String.format("%1$s,!", post.getPostName()));
             }
         }
         return baseMapper.deleteBatchIds(Arrays.asList(postIds));

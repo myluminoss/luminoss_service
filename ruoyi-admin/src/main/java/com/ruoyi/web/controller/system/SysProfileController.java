@@ -59,10 +59,10 @@ public class SysProfileController extends BaseController {
     @PutMapping
     public R<Void> updateProfile(@RequestBody SysUser user) {
         if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         }
         if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         }
         user.setUserId(getUserId());
         user.setUserName(null);
@@ -72,7 +72,7 @@ public class SysProfileController extends BaseController {
         if (userService.updateUserProfile(user) > 0) {
             return R.ok();
         }
-        return R.fail("，");
+        return R.fail(",");
     }
 
     /**
@@ -88,7 +88,7 @@ public class SysProfileController extends BaseController {
         String userName = user.getUserName();
         String password = user.getPassword();
         if (!BCrypt.checkpw(oldPassword, password)) {
-            return R.fail("，");
+            return R.fail(",");
         }
         if (BCrypt.checkpw(newPassword, password)) {
             return R.fail("");
@@ -97,7 +97,7 @@ public class SysProfileController extends BaseController {
         if (userService.resetUserPwd(userName, BCrypt.hashpw(newPassword)) > 0) {
             return R.ok();
         }
-        return R.fail("，");
+        return R.fail(",");
     }
 
     /**
@@ -112,7 +112,7 @@ public class SysProfileController extends BaseController {
         if (!avatarfile.isEmpty()) {
             String extension = FileUtil.extName(avatarfile.getOriginalFilename());
             if (!StringUtils.equalsAnyIgnoreCase(extension, MimeTypeUtils.IMAGE_EXTENSION)) {
-                return R.fail("，" + Arrays.toString(MimeTypeUtils.IMAGE_EXTENSION) + "");
+                return R.fail("," + Arrays.toString(MimeTypeUtils.IMAGE_EXTENSION) + "");
             }
             SysOssVo oss = iSysOssService.upload(avatarfile);
             String avatar = oss.getUrl();
@@ -121,6 +121,6 @@ public class SysProfileController extends BaseController {
                 return R.ok(ajax);
             }
         }
-        return R.fail("，");
+        return R.fail(",");
     }
 }

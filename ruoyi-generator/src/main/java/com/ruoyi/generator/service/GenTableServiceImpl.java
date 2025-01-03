@@ -190,7 +190,7 @@ public class GenTableServiceImpl implements IGenTableService {
                 }
             }
         } catch (Exception e) {
-            throw new ServiceException("：" + e.getMessage());
+            throw new ServiceException(":" + e.getMessage());
         }
     }
 
@@ -275,7 +275,7 @@ public class GenTableServiceImpl implements IGenTableService {
                     String path = getGenPath(table, template);
                     FileUtils.writeUtf8String(sw.toString(), path);
                 } catch (Exception e) {
-                    throw new ServiceException("，：" + table.getTableName());
+                    throw new ServiceException(",:" + table.getTableName());
                 }
             }
         }
@@ -295,7 +295,7 @@ public class GenTableServiceImpl implements IGenTableService {
 
         List<GenTableColumn> dbTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
         if (CollUtil.isEmpty(dbTableColumns)) {
-            throw new ServiceException("，");
+            throw new ServiceException(",");
         }
         List<String> dbTableColumnNames = StreamUtils.toList(dbTableColumns, GenTableColumn::getColumnName);
 
@@ -306,14 +306,14 @@ public class GenTableServiceImpl implements IGenTableService {
                 GenTableColumn prevColumn = tableColumnMap.get(column.getColumnName());
                 column.setColumnId(prevColumn.getColumnId());
                 if (column.isList()) {
-                    // ，/
+                    // ,/
                     column.setDictType(prevColumn.getDictType());
                     column.setQueryType(prevColumn.getQueryType());
                 }
                 if (StringUtils.isNotEmpty(prevColumn.getIsRequired()) && !column.isPk()
                     && (column.isInsert() || column.isEdit())
                     && ((column.isUsableColumn()) || (!column.isSuperColumn()))) {
-                    // (/&/)，/
+                    // (/&/),/
                     column.setIsRequired(prevColumn.getIsRequired());
                     column.setHtmlType(prevColumn.getHtmlType());
                 }
@@ -382,7 +382,7 @@ public class GenTableServiceImpl implements IGenTableService {
                 zip.flush();
                 zip.closeEntry();
             } catch (IOException e) {
-                log.error("，：" + table.getTableName(), e);
+                log.error(",:" + table.getTableName(), e);
             }
         }
     }

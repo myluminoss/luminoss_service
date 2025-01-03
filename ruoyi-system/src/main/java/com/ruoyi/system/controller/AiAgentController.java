@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Arrays;
 
 import cn.dev33.satoken.annotation.SaIgnore;
+import cn.hutool.core.util.ObjUtil;
+import com.ruoyi.common.helper.LoginHelper;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.system.domain.vo.SysOssVo;
+import com.ruoyi.system.service.ISysOssService;
 import lombok.RequiredArgsConstructor;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
@@ -27,7 +32,7 @@ import com.ruoyi.system.service.IAiAgentService;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * Ai
+ * Ai agent
  *
  * @author ruoyi
  * @date 2024-12-22
@@ -39,43 +44,72 @@ public class AiAgentController extends BaseController {
 
     private final IAiAgentService iAiAgentService;
 
+    private final ISysOssService iSysOssService;
 
     /**
-     *
+     * get Ai agent details
      */
     @SaIgnore
+    @GetMapping("/aiAgent/getAgentDetails/{id}")
+    public R<?> getAgentDetails(@PathVariable Long id) {
+
+        return R.ok(iAiAgentService.getAgentDetails(id));
+    }
+
+    /**
+     * get Ai agent list
+     */
+    @SaIgnore
+    @GetMapping("/aiAgent/getAgentList")
+    public TableDataInfo<AiAgentVo> getAgentList(AiAgentBo bo, PageQuery pageQuery) {
+
+        return iAiAgentService.getAgentList(bo, pageQuery);
+    }
+
+    /**
+     * delete Ai
+     */
     @DeleteMapping("/aiAgent/delAgent/{id}")
     public R<?> delAgent(@PathVariable Long id) {
         List<Long> ids = new ArrayList<>();
         ids.add(id);
 
+        AiAgentVo aiAgentVo = iAiAgentService.queryById(id);
+        if (ObjUtil.isNull(aiAgentVo) || !LoginHelper.getUserId().equals(aiAgentVo.getUserId())) {
+            return R.fail("Ai agent does not exist");
+        }
+
         return R.ok(iAiAgentService.deleteWithValidByIds(ids, true));
     }
 
-
     /**
-     * Ai
+     * get my Ai agent list
      */
-    @SaIgnore
     @GetMapping("/aiAgent/getMyAgentList")
     public R<?> getMyAgentList(AiAgentBo bo) {
+        bo.setUserId(LoginHelper.getUserId());
         return R.ok(iAiAgentService.queryList(bo));
     }
 
     /**
-     * Ai
+     * create Ai
      */
     @Log(title = "Ai", businessType = BusinessType.INSERT)
-    @SaIgnore
     @PostMapping("/aiAgent/createAgent")
-    public R<Void> createAgent(@Validated(AddGroup.class) @RequestBody AiAgentBo bo) {
-        bo.setUserId(1864598613468958722L);
+    public R<?> createAgent(@Validated(AddGroup.class) @RequestBody AiAgentBo bo) {
+        bo.setUserId(LoginHelper.getUserId());
         bo.setStatus("1");
-        return toAjax(iAiAgentService.insertByBo(bo));
+
+        // upload base64
+        if (StringUtils.isNotBlank(bo.getImg()) && bo.getImg().startsWith("data:")) {
+            SysOssVo upload = iSysOssService.uploadBase64(bo.getImg());
+            bo.setImg(upload.getUrl());
+        }
+        return R.ok(iAiAgentService.createAgent(bo));
     }
 
     /**
-     * Ai
+     * Ai list
      */
     @SaCheckPermission("system:aiAgent:list")
     @GetMapping("/system/aiAgent/list")
@@ -84,7 +118,7 @@ public class AiAgentController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai export
      */
     @SaCheckPermission("system:aiAgent:export")
     @Log(title = "Ai", businessType = BusinessType.EXPORT)
@@ -95,9 +129,9 @@ public class AiAgentController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai Info
      *
-     * @param id
+     * @param id id
      */
     @SaCheckPermission("system:aiAgent:query")
     @GetMapping("/system/aiAgent/{id}")
@@ -107,7 +141,7 @@ public class AiAgentController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai add
      */
     @SaCheckPermission("system:aiAgent:add")
     @Log(title = "Ai", businessType = BusinessType.INSERT)
@@ -118,7 +152,7 @@ public class AiAgentController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai edit
      */
     @SaCheckPermission("system:aiAgent:edit")
     @Log(title = "Ai", businessType = BusinessType.UPDATE)
@@ -129,14 +163,14 @@ public class AiAgentController extends BaseController {
     }
 
     /**
-     * Ai
+     * Ai remove
      *
-     * @param ids
+     * @param ids ids
      */
     @SaCheckPermission("system:aiAgent:remove")
     @Log(title = "Ai", businessType = BusinessType.DELETE)
     @DeleteMapping("/system/aiAgent/{ids}")
-    public R<Void> remove(@NotEmpty(message = "")
+    public R<Void> remove(@NotEmpty(message = "ids is empty")
                           @PathVariable Long[] ids) {
         return toAjax(iAiAgentService.deleteWithValidByIds(Arrays.asList(ids), true));
     }

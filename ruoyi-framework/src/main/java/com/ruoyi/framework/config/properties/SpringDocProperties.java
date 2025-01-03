@@ -59,7 +59,7 @@ public class SpringDocProperties {
      *
      * @see io.swagger.v3.oas.models.info.Info
      *
-     *  springboot ，
+     *  springboot ,
      */
     @Data
     public static class InfoProperties {

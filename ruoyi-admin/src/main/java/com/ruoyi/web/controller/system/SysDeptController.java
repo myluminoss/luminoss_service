@@ -73,7 +73,7 @@ public class SysDeptController extends BaseController {
     @PostMapping
     public R<Void> add(@Validated @RequestBody SysDept dept) {
         if (!deptService.checkDeptNameUnique(dept)) {
-            return R.fail("'" + dept.getDeptName() + "'，");
+            return R.fail("'" + dept.getDeptName() + "',");
         }
         return toAjax(deptService.insertDept(dept));
     }
@@ -88,14 +88,14 @@ public class SysDeptController extends BaseController {
         Long deptId = dept.getDeptId();
         deptService.checkDeptDataScope(deptId);
         if (!deptService.checkDeptNameUnique(dept)) {
-            return R.fail("'" + dept.getDeptName() + "'，");
+            return R.fail("'" + dept.getDeptName() + "',");
         } else if (dept.getParentId().equals(deptId)) {
-            return R.fail("'" + dept.getDeptName() + "'，");
+            return R.fail("'" + dept.getDeptName() + "',");
         } else if (StringUtils.equals(UserConstants.DEPT_DISABLE, dept.getStatus())) {
             if (deptService.selectNormalChildrenDeptById(deptId) > 0) {
                 return R.fail("!");
             } else if (deptService.checkDeptExistUser(deptId)) {
-                return R.fail("，!");
+                return R.fail(",!");
             }
         }
         return toAjax(deptService.updateDept(dept));

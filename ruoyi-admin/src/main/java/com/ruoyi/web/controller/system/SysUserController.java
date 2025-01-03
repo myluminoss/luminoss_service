@@ -143,11 +143,11 @@ public class SysUserController extends BaseController {
     public R<Void> add(@Validated @RequestBody SysUser user) {
         deptService.checkDeptDataScope(user.getDeptId());
         if (!userService.checkUserNameUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         } else if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         } else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         }
         user.setPassword(BCrypt.hashpw(user.getPassword()));
         return toAjax(userService.insertUser(user));
@@ -164,11 +164,11 @@ public class SysUserController extends BaseController {
         userService.checkUserDataScope(user.getUserId());
         deptService.checkDeptDataScope(user.getDeptId());
         if (!userService.checkUserNameUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         } else if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         } else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
-            return R.fail("'" + user.getUserName() + "'，");
+            return R.fail("'" + user.getUserName() + "',");
         }
         return toAjax(userService.updateUser(user));
     }

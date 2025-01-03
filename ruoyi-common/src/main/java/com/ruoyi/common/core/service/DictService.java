@@ -60,7 +60,7 @@ public interface DictService {
      *
      *
      * @param dictType
-     * @return dictValuekey，dictLabelMap
+     * @return dictValuekey,dictLabelMap
      */
     Map<String, String> getAllDictByDictType(String dictType);
 }

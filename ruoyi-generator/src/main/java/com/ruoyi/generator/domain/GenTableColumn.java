@@ -200,7 +200,7 @@ public class GenTableColumn extends BaseEntity {
     }
 
     public static boolean isUsableColumn(String javaField) {
-        // isSuperColumn()Domain，，
+        // isSuperColumn()Domain,,
         return StringUtils.equalsAnyIgnoreCase(javaField, "parentId", "orderNum", "remark");
     }
 

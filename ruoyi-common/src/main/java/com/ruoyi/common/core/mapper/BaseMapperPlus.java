@@ -147,7 +147,7 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
     }
 
     /**
-     *  entity ，
+     *  entity ,
      */
     default <C> C selectVoOne(Wrapper<T> wrapper, Class<C> voClass) {
         T obj = this.selectOne(wrapper);
@@ -162,7 +162,7 @@ public interface BaseMapperPlus<M, T, V> extends BaseMapper<T> {
     }
 
     /**
-     *  entity ，
+     *  entity ,
      */
     default <C> List<C> selectVoList(Wrapper<T> wrapper, Class<C> voClass) {
         List<T> list = this.selectList(wrapper);

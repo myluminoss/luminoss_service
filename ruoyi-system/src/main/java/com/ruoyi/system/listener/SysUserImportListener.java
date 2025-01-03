@@ -78,7 +78,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
             }
         } catch (Exception e) {
             failureNum++;
-            String msg = "<br/>" + failureNum + "、 " + user.getUserName() + " ：";
+            String msg = "<br/>" + failureNum + "、 " + user.getUserName() + " :";
             failureMsg.append(msg).append(e.getMessage());
             log.error(msg, e);
         }
@@ -96,10 +96,10 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
             @Override
             public String getAnalysis() {
                 if (failureNum > 0) {
-                    failureMsg.insert(0, "，！ " + failureNum + " ，：");
+                    failureMsg.insert(0, ",! " + failureNum + " ,:");
                     throw new ServiceException(failureMsg.toString());
                 } else {
-                    successMsg.insert(0, "，！ " + successNum + " ，：");
+                    successMsg.insert(0, ",! " + successNum + " ,:");
                 }
                 return successMsg.toString();
             }

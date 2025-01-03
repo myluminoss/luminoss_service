@@ -1,5 +1,6 @@
 package com.ruoyi.system.domain.bo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.ruoyi.common.core.validate.AddGroup;
 import com.ruoyi.common.core.validate.EditGroup;
 import lombok.Data;
@@ -37,6 +38,11 @@ public class CheckInLogBo extends BaseEntity {
      */
     @NotNull(message = "", groups = { AddGroup.class, EditGroup.class })
     private Long times;
+
+    /**
+     * check in integral
+     */
+    private Integer integral;
 
     /**
      * hash

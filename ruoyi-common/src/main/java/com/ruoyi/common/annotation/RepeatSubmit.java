@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public @interface RepeatSubmit {
 
     /**
-     * (ms)，
+     * (ms),
      */
     int interval() default 5000;
 

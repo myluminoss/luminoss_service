@@ -46,6 +46,10 @@ public class AiAgent extends BaseEntity {
 
     /**
      */
+    private String iconImg;
+
+    /**
+     */
     private String img;
 
     /**
@@ -57,4 +61,22 @@ public class AiAgent extends BaseEntity {
      */
     private String remark;
 
+    /**
+     *
+     */
+    private String hash;
+
+    private String tags;
+
+    private BigDecimal marketCap;
+
+    private BigDecimal progress;
+
+    private BigDecimal dayChange;
+
+    private Long totalTransactions;
+
+    private Long invokeApi;
+
+    private Integer decimals;
 }

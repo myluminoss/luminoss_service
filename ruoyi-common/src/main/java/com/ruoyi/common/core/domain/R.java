@@ -33,11 +33,11 @@ public class R<T> implements Serializable {
     private T data;
 
     public static <T> R<T> ok() {
-        return restResult(null, SUCCESS, "");
+        return restResult(null, SUCCESS, "Successfully");
     }
 
     public static <T> R<T> ok(T data) {
-        return restResult(data, SUCCESS, "");
+        return restResult(data, SUCCESS, "Successfully");
     }
 
     public static <T> R<T> ok(String msg) {
@@ -49,7 +49,7 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> fail() {
-        return restResult(null, FAIL, "");
+        return restResult(null, FAIL, "Failed");
     }
 
     public static <T> R<T> fail(String msg) {
@@ -57,7 +57,7 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> fail(T data) {
-        return restResult(data, FAIL, "");
+        return restResult(data, FAIL, "Failed");
     }
 
     public static <T> R<T> fail(String msg, T data) {
@@ -69,21 +69,21 @@ public class R<T> implements Serializable {
     }
 
     /**
+     * result warn message
      *
-     *
-     * @param msg
-     * @return
+     * @param msg message
+     * @return R
      */
     public static <T> R<T> warn(String msg) {
         return restResult(null, HttpStatus.WARN, msg);
     }
 
     /**
+     * result warn message
      *
-     *
-     * @param msg
-     * @param data
-     * @return
+     * @param msg message
+     * @param data data
+     * @return R
      */
     public static <T> R<T> warn(String msg, T data) {
         return restResult(data, HttpStatus.WARN, msg);

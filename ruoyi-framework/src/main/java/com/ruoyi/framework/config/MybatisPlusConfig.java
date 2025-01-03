@@ -44,11 +44,11 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * ，
+     * ,
      */
     public PaginationInnerInterceptor paginationInnerInterceptor() {
         PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
-        // ， 500 ，-1
+        // , 500 ,-1
         paginationInnerInterceptor.setMaxLimit(-1L);
         //
         paginationInnerInterceptor.setOverflow(true);
@@ -80,7 +80,7 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * PaginationInnerInterceptor ，
+     * PaginationInnerInterceptor ,
      * https://baomidou.com/pages/97710a/
      * OptimisticLockerInnerInterceptor
      * https://baomidou.com/pages/0d93c0/
@@ -88,7 +88,7 @@ public class MybatisPlusConfig {
      * https://baomidou.com/pages/4c6bcf/
      * ISqlInjector sql
      * https://baomidou.com/pages/42ea4a/
-     * BlockAttackInnerInterceptor ，
+     * BlockAttackInnerInterceptor ,
      * https://baomidou.com/pages/f9a237/
      * IllegalSQLInnerInterceptor sql(SQL)
      * IdentifierGenerator

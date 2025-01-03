@@ -78,7 +78,7 @@ public class RateLimiterAspect {
             if (e instanceof ServiceException) {
                 throw e;
             } else {
-                throw new RuntimeException("，");
+                throw new RuntimeException(",");
             }
         }
     }

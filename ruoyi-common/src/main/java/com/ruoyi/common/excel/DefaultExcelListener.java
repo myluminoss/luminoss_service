@@ -80,7 +80,7 @@ public class DefaultExcelListener<T> extends AnalysisEventListener<T> implements
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        log.debug("！");
+        log.debug("!");
     }
 
     @Override

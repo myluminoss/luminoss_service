@@ -35,7 +35,7 @@ public interface ISysConfigService {
     /**
      *
      *
-     * @return true，false
+     * @return true,false
      */
     boolean selectCaptchaEnabled();
 

@@ -49,10 +49,10 @@ public class DefaultExcelResult<T> implements ExcelResult<T> {
         int successCount = list.size();
         int errorCount = errorList.size();
         if (successCount == 0) {
-            return "，";
+            return ",";
         } else {
             if (errorCount == 0) {
-                return StrUtil.format("，！{}", successCount);
+                return StrUtil.format(",!{}", successCount);
             } else {
                 return "";
             }

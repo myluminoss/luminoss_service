@@ -18,12 +18,12 @@ public @interface ExcelEnumFormat {
     Class<? extends Enum<?>> enumClass();
 
     /**
-     * code，code
+     * code,code
      */
     String codeField() default "code";
 
     /**
-     * text，text
+     * text,text
      */
     String textField() default "text";
 

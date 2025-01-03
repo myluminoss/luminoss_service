@@ -22,11 +22,11 @@ public class SysIndexController {
     private final RuoYiConfig ruoyiConfig;
 
     /**
-     * ，
+     * ,
      */
     @SaIgnore
     @GetMapping("/")
     public String index() {
-        return StringUtils.format("{}，：v{}，。", ruoyiConfig.getName(), ruoyiConfig.getVersion());
+        return StringUtils.format("{},:v{},.", ruoyiConfig.getName(), ruoyiConfig.getVersion());
     }
 }

@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import com.ruoyi.common.core.domain.PageQuery;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.vo.SysUserVo;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public interface ISysUserService {
 
+    SysUserVo getUserVoBySysUser(SysUser user);
 
     TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery);
 

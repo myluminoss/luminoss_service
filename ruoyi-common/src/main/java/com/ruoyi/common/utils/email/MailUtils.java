@@ -49,8 +49,8 @@ public class MailUtils {
     }
 
     /**
-     * ，<br>
-     * “,”，“;”
+     * ,<br>
+     * “,”,“;”
      *
      * @param to
      * @param subject
@@ -64,8 +64,8 @@ public class MailUtils {
     }
 
     /**
-     * HTML，<br>
-     * “,”，“;”
+     * HTML,<br>
+     * “,”,“;”
      *
      * @param to
      * @param subject
@@ -79,8 +79,8 @@ public class MailUtils {
     }
 
     /**
-     * ，<br>
-     * “,”，“;”
+     * ,<br>
+     * “,”,“;”
      *
      * @param to
      * @param subject
@@ -94,12 +94,12 @@ public class MailUtils {
     }
 
     /**
-     * ，<br>
-     * 、、“,”，“;”
+     * ,<br>
+     * 、、“,”,“;”
      *
-     * @param to      ，“,”，“;”
-     * @param cc      ，“,”，“;”
-     * @param bcc     ，“,”，“;”
+     * @param to      ,“,”,“;”
+     * @param cc      ,“,”,“;”
+     * @param bcc     ,“,”,“;”
      * @param subject
      * @param content
      * @param isHtml  HTML
@@ -112,7 +112,7 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
      * @param tos
      * @param subject
@@ -125,7 +125,7 @@ public class MailUtils {
     }
 
     /**
-     * HTML，
+     * HTML,
      *
      * @param tos
      * @param subject
@@ -139,7 +139,7 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
      * @param tos
      * @param subject
@@ -153,11 +153,11 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
      * @param tos
-     * @param ccs     ，null
-     * @param bccs    ，null
+     * @param ccs     ,null
+     * @param bccs    ,null
      * @param subject
      * @param content
      * @param isHtml  HTML
@@ -175,7 +175,7 @@ public class MailUtils {
      *
      *
      * @param mailAccount
-     * @param to          ，
+     * @param to          ,
      * @param subject
      * @param content
      * @param isHtml      HTML
@@ -207,8 +207,8 @@ public class MailUtils {
      *
      * @param mailAccount
      * @param tos
-     * @param ccs         ，null
-     * @param bccs        ，null
+     * @param ccs         ,null
+     * @param bccs        ,null
      * @param subject
      * @param content
      * @param isHtml      HTML
@@ -221,13 +221,13 @@ public class MailUtils {
     }
 
     /**
-     * HTML，<br>
-     * “,”，“;”
+     * HTML,<br>
+     * “,”,“;”
      *
      * @param to
      * @param subject
      * @param content
-     * @param imageMap ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap ,cid:$IMAGE_PLACEHOLDER
      * @param files
      * @return message-id
      * @since 3.2.0
@@ -237,13 +237,13 @@ public class MailUtils {
     }
 
     /**
-     * ，<br>
-     * “,”，“;”
+     * ,<br>
+     * “,”,“;”
      *
      * @param to
      * @param subject
      * @param content
-     * @param imageMap ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml   HTML
      * @param files
      * @return message-id
@@ -253,15 +253,15 @@ public class MailUtils {
     }
 
     /**
-     * ，<br>
-     * 、、“,”，“;”
+     * ,<br>
+     * 、、“,”,“;”
      *
-     * @param to       ，“,”，“;”
-     * @param cc       ，“,”，“;”
-     * @param bcc      ，“,”，“;”
+     * @param to       ,“,”,“;”
+     * @param cc       ,“,”,“;”
+     * @param bcc      ,“,”,“;”
      * @param subject
      * @param content
-     * @param imageMap ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml   HTML
      * @param files
      * @return message-id
@@ -272,12 +272,12 @@ public class MailUtils {
     }
 
     /**
-     * HTML，
+     * HTML,
      *
      * @param tos
      * @param subject
      * @param content
-     * @param imageMap ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap ,cid:$IMAGE_PLACEHOLDER
      * @param files
      * @return message-id
      * @since 3.2.0
@@ -287,12 +287,12 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
      * @param tos
      * @param subject
      * @param content
-     * @param imageMap ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml   HTML
      * @param files
      * @return message-id
@@ -302,14 +302,14 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
      * @param tos
-     * @param ccs      ，null
-     * @param bccs     ，null
+     * @param ccs      ,null
+     * @param bccs     ,null
      * @param subject
      * @param content
-     * @param imageMap ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml   HTML
      * @param files
      * @return message-id
@@ -325,10 +325,10 @@ public class MailUtils {
      *
      *
      * @param mailAccount
-     * @param to          ，
+     * @param to          ,
      * @param subject
      * @param content
-     * @param imageMap    ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap    ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml      HTML
      * @param files
      * @return message-id
@@ -345,7 +345,7 @@ public class MailUtils {
      * @param tos
      * @param subject
      * @param content
-     * @param imageMap    ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap    ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml      HTML
      * @param files
      * @return message-id
@@ -360,11 +360,11 @@ public class MailUtils {
      *
      * @param mailAccount
      * @param tos
-     * @param ccs         ，null
-     * @param bccs        ，null
+     * @param ccs         ,null
+     * @param bccs        ,null
      * @param subject
      * @param content
-     * @param imageMap    ，cid:$IMAGE_PLACEHOLDER
+     * @param imageMap    ,cid:$IMAGE_PLACEHOLDER
      * @param isHtml      HTML
      * @param files
      * @return message-id
@@ -376,7 +376,7 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
      * @param mailAccount
      * @param isSingleton （）
@@ -401,11 +401,11 @@ public class MailUtils {
      * @param mailAccount
      * @param useGlobalSession Session
      * @param tos
-     * @param ccs              ，null
-     * @param bccs             ，null
+     * @param ccs              ,null
+     * @param bccs             ,null
      * @param subject
      * @param content
-     * @param imageMap         ，cid:${cid}
+     * @param imageMap         ,cid:${cid}
      * @param isHtml           HTML
      * @param files
      * @return message-id
@@ -443,9 +443,9 @@ public class MailUtils {
     }
 
     /**
-     * ，
+     * ,
      *
-     * @param addresses ，null
+     * @param addresses ,null
      * @return
      */
     private static List<String> splitAddress(String addresses) {

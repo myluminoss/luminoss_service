@@ -65,4 +65,5 @@ public class AiMessageVo implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
+    private String role;
 }

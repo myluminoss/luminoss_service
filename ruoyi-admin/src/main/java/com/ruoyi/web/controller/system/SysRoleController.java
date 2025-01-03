@@ -82,9 +82,9 @@ public class SysRoleController extends BaseController {
     public R<Void> add(@Validated @RequestBody SysRole role) {
         roleService.checkRoleAllowed(role);
         if (!roleService.checkRoleNameUnique(role)) {
-            return R.fail("'" + role.getRoleName() + "'，");
+            return R.fail("'" + role.getRoleName() + "',");
         } else if (!roleService.checkRoleKeyUnique(role)) {
-            return R.fail("'" + role.getRoleName() + "'，");
+            return R.fail("'" + role.getRoleName() + "',");
         }
         return toAjax(roleService.insertRole(role));
 
@@ -100,16 +100,16 @@ public class SysRoleController extends BaseController {
         roleService.checkRoleAllowed(role);
         roleService.checkRoleDataScope(role.getRoleId());
         if (!roleService.checkRoleNameUnique(role)) {
-            return R.fail("'" + role.getRoleName() + "'，");
+            return R.fail("'" + role.getRoleName() + "',");
         } else if (!roleService.checkRoleKeyUnique(role)) {
-            return R.fail("'" + role.getRoleName() + "'，");
+            return R.fail("'" + role.getRoleName() + "',");
         }
 
         if (roleService.updateRole(role) > 0) {
             roleService.cleanOnlineUserByRole(role.getRoleId());
             return R.ok();
         }
-        return R.fail("'" + role.getRoleName() + "'，");
+        return R.fail("'" + role.getRoleName() + "',");
     }
 
     /**

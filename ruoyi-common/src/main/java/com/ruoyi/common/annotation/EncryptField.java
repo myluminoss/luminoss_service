@@ -22,22 +22,22 @@ public @interface EncryptField {
     AlgorithmType algorithm() default AlgorithmType.DEFAULT;
 
     /**
-     * 。AES、SM4
+     * .AES、SM4
      */
     String password() default "";
 
     /**
-     * 。RSA、SM2
+     * .RSA、SM2
      */
     String publicKey() default "";
 
     /**
-     * 。RSA、SM2
+     * .RSA、SM2
      */
     String privateKey() default "";
 
     /**
-     * 。BASE64
+     * .BASE64
      */
     EncodeType encode() default EncodeType.DEFAULT;
 

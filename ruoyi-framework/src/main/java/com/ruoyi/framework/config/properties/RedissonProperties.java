@@ -62,12 +62,12 @@ public class RedissonProperties {
         private int connectionPoolSize;
 
         /**
-         * ，：
+         * ,:
          */
         private int idleConnectionTimeout;
 
         /**
-         * ，：
+         * ,:
          */
         private int timeout;
 
@@ -108,12 +108,12 @@ public class RedissonProperties {
         private int slaveConnectionPoolSize;
 
         /**
-         * ，：
+         * ,:
          */
         private int idleConnectionTimeout;
 
         /**
-         * ，：
+         * ,:
          */
         private int timeout;
 

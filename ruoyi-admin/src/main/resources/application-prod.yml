@@ -1,5 +1,5 @@
 --- #
-spring.servlet.multipart.location: /ruoyi/server/temp
+spring.servlet.multipart.location: /www/wwwroot/games-api/temp
 
 --- #
 spring.boot.admin.client:
@@ -39,7 +39,7 @@ spring:
           driverClassName: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:3306/games-api?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
           username: games-api
-          password: B6fZfMc6fGxEM26R
+          password:
         slave:
           lazy: true
           type: ${spring.datasource.type}
@@ -125,3 +125,12 @@ sms:
     signature:
     sdkAppId: appid
     territory: ap-guangzhou
+
+twitter:
+  baseUrl: https://api.x.com
+  consumerKey:
+  consumerSecret:
+  accessToken:
+  accessTokenSecret:
+  bearerToken:
+  useProxy: true

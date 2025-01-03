@@ -11,8 +11,8 @@ import org.lionsoul.ip2region.xdb.Searcher;
 import java.io.File;
 
 /**
- * ip，
- * ：<a href="https://gitee.com/lionsoul/ip2region/tree/master/binding/java"> ip2region IP</a>
+ * ip,
+ * :<a href="https://gitee.com/lionsoul/ip2region/tree/master/binding/java"> ip2region IP</a>
  *
  * @author lishuyan
  */
@@ -27,25 +27,25 @@ public class RegionUtils {
         if (!FileUtils.exist(existFile)) {
             ClassPathResource fileStream = new ClassPathResource(fileName);
             if (ObjectUtil.isEmpty(fileStream.getStream())) {
-                throw new ServiceException("RegionUtils，：IP！");
+                throw new ServiceException("RegionUtils,:IP!");
             }
             FileUtils.writeFromStream(fileStream.getStream(), existFile);
         }
 
         String dbPath = existFile.getPath();
 
-        // 1、 dbPath  xdb 。
+        // 1、 dbPath  xdb .
         byte[] cBuff;
         try {
             cBuff = Searcher.loadContentFromFile(dbPath);
         } catch (Exception e) {
-            throw new ServiceException("RegionUtils，：ip2region.xdb！" + e.getMessage());
+            throw new ServiceException("RegionUtils,:ip2region.xdb!" + e.getMessage());
         }
-        // 2、 cBuff 。
+        // 2、 cBuff .
         try {
             SEARCHER = Searcher.newWithBuffer(cBuff);
         } catch (Exception e) {
-            throw new ServiceException("RegionUtils，：" + e.getMessage());
+            throw new ServiceException("RegionUtils,:" + e.getMessage());
         }
     }
 

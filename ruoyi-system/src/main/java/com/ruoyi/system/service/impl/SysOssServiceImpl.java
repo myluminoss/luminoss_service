@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.ReUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -24,6 +25,7 @@ import com.ruoyi.system.domain.bo.SysOssBo;
 import com.ruoyi.system.domain.vo.SysOssVo;
 import com.ruoyi.system.mapper.SysOssMapper;
 import com.ruoyi.system.service.ISysOssService;
+import jodd.util.Base64;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
@@ -132,6 +134,31 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
     }
 
     @Override
+    public SysOssVo uploadBase64(String base64) {
+        if (StringUtils.isBlank(base64)) {
+            throw new ServiceException("base64 is blank!");
+        }
+        String[] arr = base64.split(",", 2);
+        String suffix, contentType;
+        if (arr.length == 2) {
+            base64 = arr[1];
+            contentType = ReUtil.findAll("data:(.*);base64", arr[0], 1).stream().findFirst().orElse("");
+            suffix = StringUtils.isNotBlank(contentType) && contentType.contains("/") ? "." + contentType.split("/")[1] : "";
+        } else {
+            base64 = arr[0];
+            suffix = "";
+            contentType = "";
+        }
+
+        OssClient storage = OssFactory.instance();
+        UploadResult uploadResult;
+        byte[] data = Base64.decode(base64);
+        uploadResult = storage.uploadSuffix(data, suffix, contentType);
+
+        return buildResultEntity("", suffix, storage.getConfigKey(), uploadResult);
+    }
+
+    @Override
     public SysOssVo upload(MultipartFile file) {
         String originalfileName = file.getOriginalFilename();
         String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("."), originalfileName.length());
@@ -142,7 +169,6 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
         } catch (IOException e) {
             throw new ServiceException(e.getMessage());
         }
-        //
         return buildResultEntity(originalfileName, suffix, storage.getConfigKey(), uploadResult);
     }
 
@@ -189,7 +215,7 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
      */
     private SysOssVo matchingUrl(SysOssVo oss) {
         OssClient storage = OssFactory.instance(oss.getService());
-        //  private URL，URL120s
+        //  private URL,URL120s
         if (AccessPolicyType.PRIVATE == storage.getAccessPolicy()) {
             oss.setUrl(storage.getPrivateUrl(oss.getFileName(), 120));
         }

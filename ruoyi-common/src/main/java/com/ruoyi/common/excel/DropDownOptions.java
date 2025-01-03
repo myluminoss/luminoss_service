@@ -55,11 +55,11 @@ public class DropDownOptions {
         for (int i = 0; i < vars.length; i++) {
             String var = StrUtil.trimToEmpty(String.valueOf(vars[i]));
             if (!var.matches(regex)) {
-                throw new ServiceException("，");
+                throw new ServiceException(",");
             }
             stringBuffer.append(var);
             if (i < vars.length - 1) {
-                // ，_
+                // ,_
                 stringBuffer.append(DELIMITER);
             }
         }
@@ -111,7 +111,7 @@ public class DropDownOptions {
         // ID
         Map<Number, List<T>> parentGroupByIdMap =
             parentList.stream().collect(Collectors.groupingBy(parentHowToGetIdFunction));
-        // ，Map
+        // ,Map
         sonList.forEach(everySon -> {
             if (parentGroupByIdMap.containsKey(sonHowToGetParentIdFunction.apply(everySon))) {
                 //

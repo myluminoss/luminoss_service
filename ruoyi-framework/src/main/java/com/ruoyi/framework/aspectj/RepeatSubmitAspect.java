@@ -121,10 +121,10 @@ public class RepeatSubmitAspect {
     }
 
     /**
-     * 。
+     * .
      *
-     * @param o 。
-     * @return ，true；false。
+     * @param o .
+     * @return ,true；false.
      */
     @SuppressWarnings("rawtypes")
     public boolean isFilterObject(final Object o) {

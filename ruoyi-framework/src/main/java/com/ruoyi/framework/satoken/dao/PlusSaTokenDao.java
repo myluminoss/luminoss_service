@@ -17,7 +17,7 @@ import java.util.List;
 public class PlusSaTokenDao implements SaTokenDao {
 
     /**
-     * Value，
+     * Value,
      */
     @Override
     public String get(String key) {
@@ -25,7 +25,7 @@ public class PlusSaTokenDao implements SaTokenDao {
     }
 
     /**
-     * Value， (: )
+     * Value, (: )
      */
     @Override
     public void set(String key, String value, long timeout) {
@@ -79,9 +79,9 @@ public class PlusSaTokenDao implements SaTokenDao {
         if (timeout == SaTokenDao.NEVER_EXPIRE) {
             long expire = getTimeout(key);
             if (expire == SaTokenDao.NEVER_EXPIRE) {
-                // ，
+                // ,
             } else {
-                // ，set
+                // ,set
                 this.set(key, this.get(key), timeout);
             }
             return;
@@ -91,7 +91,7 @@ public class PlusSaTokenDao implements SaTokenDao {
 
 
     /**
-     * Object，
+     * Object,
      */
     @Override
     public Object getObject(String key) {
@@ -99,7 +99,7 @@ public class PlusSaTokenDao implements SaTokenDao {
     }
 
     /**
-     * Object， (: )
+     * Object, (: )
      */
     @Override
     public void setObject(String key, Object object, long timeout) {
@@ -153,9 +153,9 @@ public class PlusSaTokenDao implements SaTokenDao {
         if (timeout == SaTokenDao.NEVER_EXPIRE) {
             long expire = getObjectTimeout(key);
             if (expire == SaTokenDao.NEVER_EXPIRE) {
-                // ，
+                // ,
             } else {
-                // ，set
+                // ,set
                 this.setObject(key, this.getObject(key), timeout);
             }
             return;

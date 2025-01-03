@@ -217,7 +217,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
             role.setRoleId(roleId);
             List<SysRole> roles = this.selectRoleList(role);
             if (CollUtil.isEmpty(roles)) {
-                throw new ServiceException("！");
+                throw new ServiceException("!");
             }
         }
     }
@@ -272,7 +272,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     @Override
     public int updateRoleStatus(SysRole role) {
         if (UserConstants.ROLE_DISABLE.equals(role.getStatus()) && this.countUserRoleByRoleId(role.getRoleId()) > 0) {
-            throw new ServiceException("，!");
+            throw new ServiceException(",!");
         }
         return baseMapper.updateById(role);
     }
@@ -366,7 +366,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
             checkRoleAllowed(role);
             checkRoleDataScope(roleId);
             if (countUserRoleByRoleId(roleId) > 0) {
-                throw new ServiceException(String.format("%1$s，!", role.getRoleName()));
+                throw new ServiceException(String.format("%1$s,!", role.getRoleName()));
             }
         }
         List<Long> ids = Arrays.asList(roleIds);

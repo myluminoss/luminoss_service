@@ -171,7 +171,7 @@ public class StreamUtils {
     }
 
     /**
-     * collectionList，<br>
+     * collectionList,<br>
      * <B>{@code Collection<E>  ------>  List<T> } </B>
      *
      * @param collection
@@ -192,7 +192,7 @@ public class StreamUtils {
     }
 
     /**
-     * collectionSet，<br>
+     * collectionSet,<br>
      * <B>{@code Collection<E>  ------>  Set<T> } </B>
      *
      * @param collection
@@ -218,7 +218,7 @@ public class StreamUtils {
      *
      * @param map1   map
      * @param map2   map
-     * @param merge lambda，key  value1 value2,value
+     * @param merge lambda,key  value1 value2,value
      * @param <K>   mapkey
      * @param <X>    mapvalue
      * @param <Y>    mapvalue

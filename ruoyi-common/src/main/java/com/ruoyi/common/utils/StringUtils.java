@@ -25,7 +25,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * *
      *
      * @param str String
-     * @return true： false：
+     * @return true: false:
      */
     public static boolean isEmpty(String str) {
         return StrUtil.isEmpty(str);
@@ -35,7 +35,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * *
      *
      * @param str String
-     * @return true： false：
+     * @return true: false:
      */
     public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
@@ -74,13 +74,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * , {} <br>
      *  {} <br>
-     *  {}  \\ { ， {}  \  \\\\ <br>
-     * ：<br>
-     * ：format("this is {} for {}", "a", "b") -> this is a for b<br>
-     * {}： format("this is \\{} for {}", "a", "b") -> this is {} for a<br>
-     * \： format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
+     *  {}  \\ { , {}  \  \\\\ <br>
+     * :<br>
+     * :format("this is {} for {}", "a", "b") -> this is a for b<br>
+     * {}: format("this is \\{} for {}", "a", "b") -> this is {} for a<br>
+     * \: format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
      *
-     * @param template ， {}
+     * @param template , {}
      * @param params
      * @return
      */
@@ -172,7 +172,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * 。，。 ：HELLO_WORLD->HelloWorld
+     * .,. :HELLO_WORLD->HelloWorld
      *
      * @param name
      * @return
@@ -182,7 +182,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     *  ：user_name->userName
+     *  :user_name->userName
      */
     public static String toCamelCase(String s) {
         return StrUtil.toCamelCase(s);
@@ -210,7 +210,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * url:
      * ? ;
-     * * ，;
+     * * ,;
      * ** ;
      *
      * @param pattern
@@ -222,23 +222,23 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * 0，。，，size， size。
+     * 0,.,,size, size.
      *
      * @param num
      * @param size
-     * @return ，。
+     * @return ,.
      */
     public static String padl(final Number num, final int size) {
         return padl(num.toString(), size, '0');
     }
 
     /**
-     * 。ssize，size。
+     * .ssize,size.
      *
      * @param s
      * @param size
      * @param c
-     * @return ，。
+     * @return ,.
      */
     public static String padl(final String s, final int size, final char c) {
         final StringBuilder sb = new StringBuilder(size);

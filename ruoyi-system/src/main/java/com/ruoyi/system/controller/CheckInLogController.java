@@ -3,10 +3,7 @@ package com.ruoyi.system.controller;
 import java.util.List;
 import java.util.Arrays;
 
-import cn.dev33.satoken.annotation.SaIgnore;
 import cn.hutool.core.util.ObjUtil;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.service.BaseScanService;
 import lombok.RequiredArgsConstructor;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
@@ -29,7 +26,7 @@ import com.ruoyi.system.service.ICheckInLogService;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- *
+ * check in
  *
  * @author ruoyi
  * @date 2024-12-04
@@ -41,35 +38,6 @@ import com.ruoyi.common.core.page.TableDataInfo;
 public class CheckInLogController extends BaseController {
 
     private final ICheckInLogService iCheckInLogService;
-
-    private final BaseScanService baseScanService;
-
-    @GetMapping("/getCheckInInfo")
-    public R<?> getCheckInInfo() {
-        return R.ok(iCheckInLogService.getCheckInInfo());
-    }
-
-    @GetMapping("/getCheckInLogByHash")
-    public R<?> getCheckInLogByHash(String hash) {
-        if (StringUtils.isBlank(hash)) {
-            return R.fail("Missing hash value");
-        }
-        CheckInLogVo checkInLogVo = iCheckInLogService.queryByHash(hash);
-
-        if ("wait".equals(checkInLogVo.getStatus())) {
-            boolean res = baseScanService.queryTransactionStatusByHash(hash);
-            if (res) {
-                CheckInLogBo checkInLogBo = new CheckInLogBo();
-                checkInLogBo.setStatus("success");
-                checkInLogBo.setId(checkInLogVo.getId());
-                checkInLogBo.setMsg("Sign in successfully");
-                iCheckInLogService.updateByBo(checkInLogBo);
-
-                checkInLogVo.setStatus("success");
-            }
-        }
-        return R.ok(checkInLogVo);
-    }
 
     @PostMapping("/checkIn")
     public R<Void> checkIn(@RequestBody CheckInLogBo bo) {
@@ -85,7 +53,7 @@ public class CheckInLogController extends BaseController {
     }
 
     /**
-     *
+     * list
      */
     @SaCheckPermission("system:checkInLog:list")
     @GetMapping("/list")
@@ -94,7 +62,7 @@ public class CheckInLogController extends BaseController {
     }
 
     /**
-     *
+     * export
      */
     @SaCheckPermission("system:checkInLog:export")
     @Log(title = "", businessType = BusinessType.EXPORT)
@@ -105,19 +73,19 @@ public class CheckInLogController extends BaseController {
     }
 
     /**
+     * info
      *
-     *
-     * @param id
+     * @param id id
      */
     @SaCheckPermission("system:checkInLog:query")
     @GetMapping("/{id}")
-    public R<CheckInLogVo> getInfo(@NotNull(message = "")
+    public R<CheckInLogVo> getInfo(@NotNull(message = "id is null")
                                      @PathVariable Long id) {
         return R.ok(iCheckInLogService.queryById(id));
     }
 
     /**
-     *
+     * add
      */
     @SaCheckPermission("system:checkInLog:add")
     @Log(title = "", businessType = BusinessType.INSERT)
@@ -128,7 +96,7 @@ public class CheckInLogController extends BaseController {
     }
 
     /**
-     *
+     * edit
      */
     @SaCheckPermission("system:checkInLog:edit")
     @Log(title = "", businessType = BusinessType.UPDATE)
@@ -139,14 +107,14 @@ public class CheckInLogController extends BaseController {
     }
 
     /**
+     * remove
      *
-     *
-     * @param ids
+     * @param ids ids
      */
     @SaCheckPermission("system:checkInLog:remove")
     @Log(title = "", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public R<Void> remove(@NotEmpty(message = "")
+    public R<Void> remove(@NotEmpty(message = "ids is empty")
                           @PathVariable Long[] ids) {
         return toAjax(iCheckInLogService.deleteWithValidByIds(Arrays.asList(ids), true));
     }

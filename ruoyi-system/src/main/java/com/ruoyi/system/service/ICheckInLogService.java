@@ -1,6 +1,7 @@
 package com.ruoyi.system.service;
 
 
+import com.ruoyi.system.domain.CheckInConfig;
 import com.ruoyi.system.domain.vo.CheckInLogVo;
 import com.ruoyi.system.domain.bo.CheckInLogBo;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -16,6 +17,11 @@ import java.util.List;
  * @date 2024-12-04
  */
 public interface ICheckInLogService {
+
+
+    String getCheckInContract();
+
+    List<CheckInConfig> getCheckInConfig();
 
     /**
      *

@@ -83,9 +83,9 @@ public class SysMenuController extends BaseController {
     @PostMapping
     public R<Void> add(@Validated @RequestBody SysMenu menu) {
         if (!menuService.checkMenuNameUnique(menu)) {
-            return R.fail("'" + menu.getMenuName() + "'，");
+            return R.fail("'" + menu.getMenuName() + "',");
         } else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath())) {
-            return R.fail("'" + menu.getMenuName() + "'，http(s)://");
+            return R.fail("'" + menu.getMenuName() + "',http(s)://");
         }
         return toAjax(menuService.insertMenu(menu));
     }
@@ -98,11 +98,11 @@ public class SysMenuController extends BaseController {
     @PutMapping
     public R<Void> edit(@Validated @RequestBody SysMenu menu) {
         if (!menuService.checkMenuNameUnique(menu)) {
-            return R.fail("'" + menu.getMenuName() + "'，");
+            return R.fail("'" + menu.getMenuName() + "',");
         } else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath())) {
-            return R.fail("'" + menu.getMenuName() + "'，http(s)://");
+            return R.fail("'" + menu.getMenuName() + "',http(s)://");
         } else if (menu.getMenuId().equals(menu.getParentId())) {
-            return R.fail("'" + menu.getMenuName() + "'，");
+            return R.fail("'" + menu.getMenuName() + "',");
         }
         return toAjax(menuService.updateMenu(menu));
     }

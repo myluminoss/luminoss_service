@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -15,6 +16,7 @@ import com.ruoyi.common.core.domain.PageQuery;
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.vo.SysUserVo;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.service.UserService;
 import com.ruoyi.common.exception.ServiceException;
@@ -22,9 +24,7 @@ import com.ruoyi.common.helper.DataBaseHelper;
 import com.ruoyi.common.helper.LoginHelper;
 import com.ruoyi.common.utils.StreamUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysPost;
-import com.ruoyi.system.domain.SysUserPost;
-import com.ruoyi.system.domain.SysUserRole;
+import com.ruoyi.system.domain.*;
 import com.ruoyi.system.mapper.*;
 import com.ruoyi.system.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +33,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,51 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
     private final SysPostMapper postMapper;
     private final SysUserRoleMapper userRoleMapper;
     private final SysUserPostMapper userPostMapper;
+    private final UserTokenMapper  userTokenMapper;
+    private final UserIntegralMapper userIntegralMapper;
+
+    public SysUserVo getUserVoBySysUser(SysUser user) {
+        SysUserVo userVo = new SysUserVo();
+
+        userVo.setId(user.getUserId());
+        userVo.setNickname(user.getNickName());
+        userVo.setAvatar(user.getAvatar());
+        userVo.setAvatarIndex(user.getAvatarIndex());
+
+        String type = "solana";
+
+        // select address
+        LambdaQueryWrapper<UserToken> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(UserToken::getUserId, user.getUserId());
+        queryWrapper.eq(UserToken::getType, type);
+        queryWrapper.last("limit 1");
+        UserToken userToken = userTokenMapper.selectOne(queryWrapper);
+        userVo.setChainType(type);
+        if (ObjUtil.isNotNull(userToken)) {
+            userVo.setWalletAddress(userToken.getToken());
+        }
+
+        // select integral
+        LambdaQueryWrapper<UserIntegral> qi = Wrappers.lambdaQuery();
+        qi.eq(UserIntegral::getUserId, user.getUserId());
+        qi.last("limit 1");
+        UserIntegral integral = userIntegralMapper.selectOne(qi);
+        if (ObjUtil.isNotNull(integral)) {
+            userVo.setEarn(integral.getIntegral());
+        } else {
+            userVo.setEarn(0L);
+        }
+
+        // set default
+        userVo.setBalance(BigDecimal.ZERO);
+        userVo.setInviteCode(user.getUserName());
+        userVo.setCurrentRanking(0L);
+        userVo.setInviteEarn(0L);
+        userVo.setInviteTotalCount(0L);
+        userVo.setInviteActivateCount(0L);
+
+        return userVo;
+    }
 
     @Override
     public TableDataInfo<SysUser> selectPageUserList(SysUser user, PageQuery pageQuery) {
@@ -256,7 +302,7 @@ public class SysUserServiceImpl implements ISysUserService, UserService {
             user.setUserId(userId);
             List<SysUser> users = this.selectUserList(user);
             if (CollUtil.isEmpty(users)) {
-                throw new ServiceException("！");
+                throw new ServiceException("!");
             }
         }
     }

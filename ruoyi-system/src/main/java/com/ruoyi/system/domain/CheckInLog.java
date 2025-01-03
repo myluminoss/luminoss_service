@@ -1,12 +1,9 @@
 package com.ruoyi.system.domain;
 
+
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import java.io.Serializable;
-import java.util.Date;
-import java.math.BigDecimal;
-
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
@@ -35,6 +32,11 @@ public class CheckInLog extends BaseEntity {
     /**
      */
     private Long times;
+
+    /**
+     * check in integral
+     */
+    private Integer integral;
 
     /**
      */
